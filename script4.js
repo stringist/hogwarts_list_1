@@ -45,8 +45,7 @@ function cleanData(jsonData) {
 
         // clean house data
         const houseUnCap = obj.house.trim();
-        const house =
-            houseUnCap[0].toUpperCase() + houseUnCap.substring(1).toLowerCase();
+        const house = houseUnCap[0].toUpperCase() + houseUnCap.substring(1).toLowerCase();
 
         const gender = obj.gender;
         // console.log(gender);
@@ -96,8 +95,9 @@ function createObj(cleanStudentObj) {
         cleanStudentObj.firstName[0].toLowerCase() +
         ".png";
     allStudents.push(student);
-    console.log(student);
+    console.table(allStudents);
 }
+console.log(allStudents);
 
 const Student = {
     firstName: "firstName",
