@@ -95,6 +95,7 @@ function createObj(cleanStudentObj) {
         student.lastName = studentObj.lastName;
         student.middleName = studentObj.middleName;
         student.house = studentObj.house;
+        student.image = "./images/" + studentObj.lastName.toLowerCase() + "_" + studentObj.firstName[0].toLowerCase() + ".png";
         console.log(student);
     });
 }
