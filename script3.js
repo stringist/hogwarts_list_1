@@ -29,15 +29,15 @@ function cleanData(jsonData) {
                 return capName;
             }
             // try to manage hyphens
-            //   if (name.includes("-")) {
-            //     const capName =
-            //       name[0].toUpperCase() +
-            //       name.substring(1, name.indexOf(`-`)).toLowerCase() +
-            //       name.charAt(name.indexOf("-" + 1)).toLowerCase() +
-            //       name.substring(name.indexOf("-" + 2)).toLowerCase();
-            //     return capName;
-            //   } 
-            else {
+            if (name.includes("-")) {
+                const hyphPos = name.indexOf("-");
+                const capName =
+                    name[0].toUpperCase() +
+                    name.substring(1, hyphPos + 1).toLowerCase() +
+                    name.charAt(hyphPos + 1).toUpperCase() +
+                    name.substring(hyphPos + 2).toLowerCase();
+                return capName;
+            } else {
                 const capName = name[0].toUpperCase() + name.substring(1).toLowerCase();
                 return capName;
             }
@@ -86,7 +86,7 @@ function cleanData(jsonData) {
 }
 
 function createObj(cleanStudentObj) {
-    console.log(cleanStudentObj);
+    // console.log(cleanStudentObj);
     allStudents.push(cleanStudentObj);
     // console.log(allStudents);
     allStudents.forEach(studentObj => {
