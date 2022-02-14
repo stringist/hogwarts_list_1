@@ -58,9 +58,8 @@ function cleanData(jsonData) {
                 lastName: capNameArr[2],
                 gender: gender,
                 house: house,
-            }
+            };
             createObj(cleanStudentObj);
-
         } else if (capNameArr.length === 2) {
             const cleanStudentObj = {
                 firstName: capNameArr[0],
@@ -68,10 +67,8 @@ function cleanData(jsonData) {
                 lastName: capNameArr[1],
                 gender: gender,
                 house: house,
-            }
+            };
             createObj(cleanStudentObj);
-
-
         } else {
             const cleanStudentObj = {
                 firstName: capNameArr[0],
@@ -79,27 +76,27 @@ function cleanData(jsonData) {
                 lastName: "N/A",
                 gender: gender,
                 house: house,
-            }
+            };
             createObj(cleanStudentObj);
         }
     });
 }
 
 function createObj(cleanStudentObj) {
-    // console.log(cleanStudentObj);
-    allStudents.push(cleanStudentObj);
-    // console.log(allStudents);
-    allStudents.forEach(studentObj => {
-        const student = Object.create(Student);
-        student.firstName = studentObj.firstName;
-        student.lastName = studentObj.lastName;
-        student.middleName = studentObj.middleName;
-        student.house = studentObj.house;
-        student.gender = studentObj.gender;
-        student.image = "./images/" + studentObj.lastName.toLowerCase() + "_" + studentObj.firstName[0].toLowerCase() + ".png";
-        console.log(student);
-    });
-    // console.log(allStudents);
+    const student = Object.create(Student);
+    student.firstName = cleanStudentObj.firstName;
+    student.lastName = cleanStudentObj.lastName;
+    student.middleName = cleanStudentObj.middleName;
+    student.house = cleanStudentObj.house;
+    student.gender = cleanStudentObj.gender;
+    student.image =
+        "./images/" +
+        cleanStudentObj.lastName.toLowerCase() +
+        "_" +
+        cleanStudentObj.firstName[0].toLowerCase() +
+        ".png";
+    allStudents.push(student);
+    console.log(student);
 }
 
 const Student = {
