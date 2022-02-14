@@ -86,18 +86,18 @@ function cleanData(jsonData) {
 }
 
 function createObj(cleanStudentObj) {
-    // console.log(cleanStudentObj);
-    allStudents.push(cleanStudentObj);
+    console.log(cleanStudentObj);
+    // allStudents.push(cleanStudentObj);
     // console.log(allStudents);
-    allStudents.forEach(studentObj => {
-        const student = Object.create(Student);
-        student.firstName = studentObj.firstName;
-        student.lastName = studentObj.lastName;
-        student.middleName = studentObj.middleName;
-        student.house = studentObj.house;
-        student.image = "./images/" + studentObj.lastName.toLowerCase() + "_" + studentObj.firstName[0].toLowerCase() + ".png";
-        console.log(student);
-    });
+    // allStudents.forEach(studentObj => {
+    //     const student = Object.create(Student);
+    //     student.firstName = studentObj.firstName;
+    //     student.lastName = studentObj.lastName;
+    //     student.middleName = studentObj.middleName;
+    //     student.house = studentObj.house;
+    //     student.image = "./images/" + studentObj.lastName.toLowerCase() + "_" + studentObj.firstName[0].toLowerCase() + ".png";
+    //     console.log(student);
+    // });
 }
 
 const Student = {
