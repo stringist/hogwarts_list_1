@@ -1,5 +1,4 @@
-[
-    {
+[{
         "fullname": "Pansy parkinson",
         "gender": "girl",
         "house": "slytherin"
@@ -89,7 +88,7 @@
         "gender": "boy",
         "house": "Gryffindor"
     },
- 
+
     {
         "fullname": "Mandy brocklehurst",
         "gender": "girl",
@@ -150,7 +149,7 @@
         "gender": "boy",
         "house": "Slytherin"
     },
-  
+
     {
         "fullname": "Millicent bulstrode",
         "gender": "girl",
