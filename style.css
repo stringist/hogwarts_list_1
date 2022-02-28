@@ -1,0 +1,6 @@
+body {
+    background-image: url("./assets/parchment2.png");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}

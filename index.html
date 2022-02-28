@@ -2,15 +2,142 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hogwarts Student list</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hogwarts Student List</title>
+    <link rel="stylesheet" href="style.css">
     <script src="./script4.js"></script>
 </head>
 
 <body>
+    <h1>List of Students</h1>
 
+    <!-- <p>
+        Filter:
+        <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
+        <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
+        <button class="filter" data-action="filter" data-filter="hufflepuff">HufflePuff</button>
+        <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
+    </p> -->
+
+    <hr />
+
+    <table id="list">
+        <thead>
+            <tr id="sorting">
+                <th data-action="sort" data-sort-direction="asc" data-sort="name">
+                    Name
+                </th>
+                <th data-action="sort" data-sort-direction="asc" data-sort="house">
+                    House <label for="houses">Show:</label>
+                    <select name="houses" id="houses">
+              <option value="all">All houses</option>
+              <option value="gryffindor">Gryffindor</option>
+              <option value="hufflepuff">Hufflepuff</option>
+              <option value="ravenclaw">Ravenclaw</option>
+              <option value="slytherin">Slytherin</option>
+            </select>
+                </th>
+                <th data-action="sort" data-sort-direction="asc" data-sort="blood">
+                    Blood status
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- student template will be copied and inserted here -->
+        </tbody>
+    </table>
+    <template id="studentShort">
+      <tr>
+        <td data-field="lastNameFirstName">Last Name, First Name</td>
+        <td data-field="house">House</td>
+        <td data-field="bloodStatus">Blood Status</td>
+      </tr>
+    </template>
+    <!-- modal popup -->
+    <div class="modal">
+        <div class="modalcontent">
+            <div class="hidden redstamp">Expelled</div>
+            <img src="" alt="" />
+            <ul>
+                <li>First Name:<span class="firstName"></span></li>
+                <li>Middle Name:<span class="middleName"></span></li>
+                <li>Surname:<span class="surname"></span></li>
+                <li>Nickname:<span class="nickname"></span></li>
+                <li>House:<span class="house"></span></li>
+                <li>Blood status:<span class="blood"></span></li>
+                <li>Prefect:<span class=""></span></li>
+                <li>Inquisitorial Squad<span class=""></span></li>
+            </ul>
+            <button id="makePrefect">Appoint as Prefect</button>
+            <button id="inquisitorial">Add to Inquisitorial Squad</button>
+            <button id="expel">Expel student</button>
+            <button id="back" class="closebutton">Back to list</button>
+        </div>
+    </div>
+
+    <!-- Dialogs for handling too many prefects -->
+
+    <div id="onlytwoprefects" class="dialog hidden">
+        <div class="dialogcontent">
+            <h1>There can only be two prefects for each house!</h1>
+            <h2>Remove one, if you wish to you appoint another</h2>
+            <p>
+                <button id="removeA" data-action="remove1">
+            Remove <span data-field="prefectA">Name</span>?
+          </button>
+            </p>
+            <p>
+                <button id="removeB" data-action="remove2">
+            Remove <span data-field="winnerB">Name</span>?
+          </button>
+            </p>
+            <p class="or">or</p>
+            <button class="close`button">Go back</button>
+        </div>
+    </div>
+
+    <div id="sexistdialog" class="dialog hidden">
+        <div class="dialogcontent">
+            <h1>There may only be one boy and one girl prefect in each house.</h1>
+            <h2>Remove one, if you wish to appoint a new one</h2>
+            <p>
+                <button id="removeother" data-action="remove1">
+            Remove <span class="prefect1">Name</span>?
+          </button>
+            </p>
+            <p class="or">Or</p>
+            <button class="closebutton">Go back</button>
+        </div>
+    </div>
+
+    <div id="racistdialog" class="dialog hidden">
+        <div class="dialogcontent">
+            <h1>
+                Only students who are pure of blood may be appointed to the Inquisitorial Squad!
+            </h1>
+            <button class="closebutton">Alrighty then.</button>
+        </div>
+    </div>
+
+    <div id="leftsquad" class="dialog hidden">
+        <div class="dialogcontent">
+            <h1>
+                <span class="squadMember">Name</span> has left the Inquisitorial Squad!
+            </h1>
+            <button class="closebutton">Very well...</button>
+        </div>
+    </div>
+    <div id="cantexpel" class="dialog hidden">
+        <div class="dialogcontent">
+            <h1>You do not have the power to expel <span class="infiltrator">Name</span>!
+            </h1>
+            <button class="closebutton">I see.</button>
+        </div>
+    </div>
+
+    <script src="animalwinners2.js"></script>
 </body>
 
 </html>
