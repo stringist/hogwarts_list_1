@@ -26,17 +26,20 @@
     <table id="list">
         <thead>
             <tr id="sorting">
-                <th data-action="sort" data-sort-direction="asc" data-sort="name">
-                    Name
+                <th data-action="sort" data-sort-direction="asc" data-sort="lastName">
+                    Surname
+                </th>
+                <th data-action="sort" data-sort-direction="asc" data-sort="firstName">
+                    First name
                 </th>
                 <th data-action="sort" data-sort-direction="asc" data-sort="house">
                     House <label for="houses">Show:</label>
                     <select name="houses" id="houses">
               <option value="all">All houses</option>
-              <option value="gryffindor">Gryffindor</option>
-              <option value="hufflepuff">Hufflepuff</option>
-              <option value="ravenclaw">Ravenclaw</option>
-              <option value="slytherin">Slytherin</option>
+              <option data-action="filter" data-filter="gryffindor" value="gryffindor">Gryffindor</option>
+              <option data-action="filter" data-filter="ravenclaw" value="hufflepuff">Hufflepuff</option>
+              <option data-action="filter" data-filter="hufflepuff" value="ravenclaw">Ravenclaw</option>
+              <option data-action="filter" data-filter="slytherin" value="slytherin">Slytherin</option>
             </select>
                 </th>
                 <th data-action="sort" data-sort-direction="asc" data-sort="blood">

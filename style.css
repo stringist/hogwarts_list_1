@@ -1,6 +1,46 @@
+@font-face {
+    font-family: "parry hotter";
+    src: url("./fonts/ParryHotter-LOZ.ttf");
+}
+
+@font-face {
+    font-family: "lumos";
+    src: url("./fonts/lumos_latino.ttf");
+}
+
+@font-face {
+    font-family: "ovation";
+    src: url("./fonts/Ovation-axD6o.ttf");
+}
+
+@font-face {
+    font-family: "albus";
+    src: url("./fonts/HanryPotterDemoRegular.ttf");
+}
+
+:root {
+    --darkred: rgb(26, 0, 0);
+    --headline: "parry hotter";
+    --accent: "lumos";
+    --cursive: "ovation";
+}
+
 body {
     background-image: url("./assets/parchment2.png");
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
+    color: var(--darkred);
+}
+
+h1 {
+    font-family: var(--headline);
+}
+
+h2 {
+    font-family: var(--accent);
+}
+
+.dialog h1 {
+    font-family: var(--cursive);
 }
