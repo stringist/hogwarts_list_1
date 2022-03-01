@@ -21,6 +21,7 @@ const Student = {
     nickName: "",
     house: "",
     blood: "",
+    gender: "",
     prefect: false,
     inquisitor: false,
     expelled: false,
@@ -59,8 +60,17 @@ async function loadJSON() {
 
 // cleaning the data
 function cleanData(jsonData) {
-    const nameArr = jsonData.map(getNameParts);
-    console.log(nameArr);
+    jsonData.forEach(obj => {
+        obj.fullname = getNameParts(obj);
+        obj.house = cleanHouse(obj)
+    });
+    // jsonData.forEach(obj => { return cleanHouse(obj) });
+    // jsonData.forEach(object => { return object.gender });
+    // const nameArr = jsonData.map(getNameParts);
+    // const houseArr = jsonData.map(cleanHouse);
+    // const genderArr = jsonData.map(object => { return object.gender });
+    console.log(jsonData);
+    prepareObjects(jsonData);
 }
 
 function getNameParts(jsonObject) {
@@ -74,23 +84,27 @@ function getNameParts(jsonObject) {
     const firstName = cleanNameArr[0];
     if (cleanNameArr.length === 2) {
         const lastName = cleanNameArr[1];
-        console.log(`Length is 2, first name is ${firstName}, last name is ${lastName}`);
-        return { firstName, lastName }
+        return { firstName, lastName };
     }
 
     if (cleanNameArr.length === 3) {
         if (cleanNameArr[1].includes(`"`)) {
             const nickName = cleanNameArr[1];
             const lastName = cleanNameArr[2];
-            // console.log(`Length is three, has " , firstName ${firstName}, nickname ${nickName}, lastName ${lastName}`)
             return { firstName, nickName, lastName };
         } else {
             const middleName = cleanNameArr[1];
             const lastName = cleanNameArr[2];
-            // console.log(`Length is three, no " , firstName ${firstName}, middlename ${middleName}, lastName ${lastName}`)
             return { firstName, middleName, lastName };
         }
-    } else { return { firstName }; }
+    } else { return { firstName } }
+}
+
+function cleanHouse(jsonObj) {
+    const house = jsonObj.house.trim();
+    const cleanHouse = capitalize(house);
+    return cleanHouse;
+
 }
 
 function capitalize(string) {
@@ -118,25 +132,24 @@ function capitalize(string) {
 }
 
 function prepareObjects(jsonData) {
-    console.log(jsonData);
-    allStudents = jsonData.map(prepareObject());
+    allStudents = jsonData.map(prepareObject);
 
     buildList();
 }
 
-// function prepareObject(jsonObject) {
-//     const student = Object.create(Student);
-//     // const texts = jsonObject.fullname.split(" ");
-//     student.firstName = ;
-//     student.middleName = jsonObject. ;
-// student.lastName = jsonObject. ;
-// student.nickName = jsonObject. ;
-// student.house = jsonObject. ;
-// student.blood =
-// student.prefect =
-// student.inquisitor =
-// student.expelled =
-// }
+function prepareObject(jsonObject) {
+    const student = Object.create(Student);
+    student.firstName = jsonObject.fullname.firstName;
+    student.middleName = jsonObject.fullname.middleName;
+    student.lastName = jsonObject.fullname.lastName;
+    student.nickName = jsonObject.fullname.nickName;
+    student.house = jsonObject.house;
+    student.gender = jsonObject.gender;
+    // blood: "",
+
+    console.table(student);
+}
+
 
 function selectFilter(event) {
     const filter = event.target.dataset.filter;
