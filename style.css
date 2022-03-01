@@ -108,8 +108,18 @@ button {
     transform: rotate(2deg);
 }
 
+table {
+    margin: auto 2rem auto 2rem;
+}
+
+tr {
+    font-family: var(--cursive);
+    font-size: 2rem;
+    text-align: center;
+}
+
 .hidden {
-    /* display: none; */
+    display: none;
 }
 
 .odd {
@@ -125,7 +135,7 @@ button {
 }
 
 #sorting {
-    display: flex;
+    /* display: flex; */
     min-width: 100%;
     justify-content: space-around;
     border-bottom: solid 1px var(--darkred);

@@ -133,8 +133,9 @@ function capitalize(string) {
 
 function prepareObjects(jsonData) {
     allStudents = jsonData.map(prepareObject);
-
-    buildList();
+    console.table(allStudents);
+    // buildList();
+    displayList(allStudents);
 }
 
 function prepareObject(jsonObject) {
@@ -146,8 +147,7 @@ function prepareObject(jsonObject) {
     student.house = jsonObject.house;
     student.gender = jsonObject.gender;
     // blood: "",
-
-    console.table(student);
+    return student;
 }
 
 
@@ -226,7 +226,7 @@ function sortList(sortedList) {
 }
 
 function buildList() {
-    const currentList = filterList(allstudents);
+    const currentList = filterList(allStudents);
     const sortedList = sortList(currentList);
     displayList(sortedList);
 }
@@ -236,56 +236,59 @@ function displayList(students) {
     document.querySelector("#list tbody").innerHTML = "";
 
     // build a new list
-    students.forEach(displayAnimal);
+    students.forEach(displayStudent);
 }
+
 
 function displayStudent(student) {
     // create clone
-    const clone = document
-        .querySelector("template#student")
+    const clone = document.querySelector("template#studentTable")
         .content.cloneNode(true);
 
     // set clone data
 
-    // TODO: Show star ⭐ or ☆
-    clone.querySelector("[data-field=name]").textContent = student.name;
-    clone.querySelector("[data-field=desc]").textContent = student.desc;
-    clone.querySelector("[data-field=type]").textContent = student.type;
-    clone.querySelector("[data-field=age]").textContent = student.age;
-    if (student.star === true) {
-        clone.querySelector("[data-field=star").textContent = "⭐";
-    } else {
-        clone.querySelector("[data-field=star").textContent = "☆";
-    }
+
+    clone.querySelector("[data-field=lastName]").textContent = student.lastName;
+    clone.querySelector("[data-field=firstName]").textContent = student.firstName;
+    clone.querySelector("[data-field=house]").textContent = student.house;
+    clone.querySelector("[data-field=house]").textContent = student.house;
+    clone.querySelector("[data-field=house]").textContent = student.house;
+    clone.querySelector("[data-field=house]").textContent = student.house;
+    // clone.querySelector("[data-field=blood]").textContent = student.age;
+    // if (student.star === true) {
+    //     clone.querySelector("[data-field=star").textContent = "⭐";
+    // } else {
+    //     clone.querySelector("[data-field=star").textContent = "☆";
+    // }
 
     // TODO: Add event listener to click on star
-    clone
-        .querySelector("[data-field=star]")
-        .addEventListener("click", toggleStar);
+    // clone
+    //     .querySelector("[data-field=star]")
+    //     .addEventListener("click", toggleStar);
 
-    function toggleStar() {
-        if (student.star) {
-            student.star = false;
-        } else {
-            student.star = true;
-        }
-        buildList();
-    }
+    // function toggleStar() {
+    //     if (student.star) {
+    //         student.star = false;
+    //     } else {
+    //         student.star = true;
+    //     }
+    //     buildList();
+    // }
 
-    clone.querySelector(`[data-field='winner']`).dataset.winner = student.winner;
-    clone
-        .querySelector(`[data-field='winner']`)
-        .addEventListener("click", toggleWinner);
+    // clone.querySelector(`[data-field='winner']`).dataset.winner = student.winner;
+    // clone
+    //     .querySelector(`[data-field='winner']`)
+    //     .addEventListener("click", toggleWinner);
 
-    function toggleWinner() {
-        if (student.winner) {
-            student.winner = false;
-        } else {
-            tryToMakeWinner(student);
-        }
-        buildList();
-    }
-    // append clone to list
+    // function toggleWinner() {
+    //     if (student.winner) {
+    //         student.winner = false;
+    //     } else {
+    //         tryToMakeWinner(student);
+    //     }
+    //     buildList();
+    // }
+    // // append clone to list
     document.querySelector("#list tbody").appendChild(clone);
 }
 
