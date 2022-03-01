@@ -5,12 +5,13 @@
 
 @font-face {
     font-family: "lumos";
-    src: url("./fonts/lumos_latino.ttf");
+    src: url("./fonts/LUMOS.TTF");
+    src: url("./fonts/")
 }
 
 @font-face {
     font-family: "ovation";
-    src: url("./fonts/Ovation-axD6o.ttf");
+    src: url("./fonts/Ovation.ttf");
 }
 
 @font-face {
@@ -20,9 +21,24 @@
 
 :root {
     --darkred: rgb(26, 0, 0);
+    --medred: rgb(152, 0, 0);
     --headline: "parry hotter";
     --accent: "lumos";
     --cursive: "ovation";
+    --altcursive: "albus";
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+* {
+    box-sizing: inherit;
 }
 
 body {
@@ -35,12 +51,100 @@ body {
 
 h1 {
     font-family: var(--headline);
+    text-align: center;
+    font-size: 2.5rem;
+    padding: auto;
 }
 
 h2 {
-    font-family: var(--accent);
+    font-family: var(--headline);
+    font-size: 3rem;
+}
+
+th {
+    font-family: var(--headline);
+    font-size: 1.5rem;
+    /* text-align: center; */
+}
+
+table {
+    width: 100%;
+}
+
+ul {
+    list-style: none;
+    font-family: var(--headline);
+    font-size: 1.5rem;
+    columns: 2;
+    max-width: 50vw;
+}
+
+label {
+    font-size: .8rem;
+}
+
+select {
+    font-family: var(--headline);
+    background-color: unset;
+    border: solid .51px var(--darkred);
+    border-width: 3px 3px 3px 4px;
+    border-radius: 95% 4% 97% 5%/4% 94% 3% 95%;
+    transform: rotate(2deg);
+    padding: .5rem;
+}
+
+option {
+    background-color: unset;
+}
+
+button {
+    font-family: var(--headline);
+    font-size: 1.2rem;
+    background-color: unset;
+    padding: .5rem;
+    border: solid .51px var(--darkred);
+    border-width: 5px 3px 3px 5px;
+    border-radius: 95% 4% 97% 5%/4% 94% 3% 95%;
+    transform: rotate(2deg);
+}
+
+.hidden {
+    /* display: none; */
+}
+
+.odd {
+    border-width: 3px 2px 5px 5px;
+    border-radius: 4% 95% 6% 95%/95% 4% 92% 5%;
+    transform: rotate(-2deg);
+}
+
+.closebutton {
+    border-width: 3px 3px 5px 5px;
+    border-radius: 4% 95% 6% 95%/95% 4% 92% 5%;
+    transform: rotate(-3deg);
+}
+
+#sorting {
+    display: flex;
+    min-width: 100%;
+    justify-content: space-around;
+    border-bottom: solid 1px var(--darkred);
+    border-width: 2px;
+    border-radius: 4% 95% 6% 95%/95% 4% 5%;
+    transform: rotate(-.5deg);
+}
+
+#sorting>* {
+    /* border: solid 1px blue; */
+}
+
+.modal,
+.modalcontent,
+.dialog {
+    max-width: 100%;
 }
 
 .dialog h1 {
     font-family: var(--cursive);
+    font-size: 5rem;
 }

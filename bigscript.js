@@ -1,0 +1,387 @@
+"use strict";
+
+window.addEventListener("DOMContentLoaded", start);
+
+let allStudents = [];
+let expelledStudents = []; // let filteredArray = [];
+// The prototype for all animals:
+
+const settings = {
+    filterBy: "*",
+    sortBy: "name",
+    sortDir: "asc",
+    hacked: false,
+};
+
+// The prototype for all sudents:
+const Student = {
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    nickName: "",
+    house: "",
+    blood: "",
+    prefect: false,
+    inquisitor: false,
+    expelled: false,
+};
+
+function start() {
+    console.log("ready");
+    loadJSON();
+    addEventListeners();
+}
+
+function addEventListeners() {
+    // to do: get input from house dropdown
+    // const filterOptions = document.querySelector("[data-action=filter]");
+    const sortingButtons = document.querySelectorAll("[data-action=sort]");
+    const houseDrop = document.querySelector("#housesDrop");
+    const houseFilter = houseDrop.options;
+    console.log(houseFilter);
+    // const houseValue = dropDown.options[dropDown.selectedIndex].value;
+
+    // houseFilter.forEach((option) => {
+    //     option.addEventListener("click", selectFilter);
+    // });
+
+    sortingButtons.forEach((category) => {
+        category.addEventListener("click", selectSort);
+    });
+}
+
+async function loadJSON() {
+    const response = await fetch("students.json");
+    const jsonData = await response.json();
+
+    cleanData(jsonData);
+}
+
+// cleaning the data
+function cleanData(jsonData) {
+    const nameArr = jsonData.map(getNameParts);
+    console.log(nameArr);
+}
+
+function getNameParts(jsonObject) {
+    const fullName = jsonObject.fullname.trim();
+    const nameArr = fullName.split(" ");
+    const cleanNameArr = nameArr.map((namePart) => {
+        const trimName = namePart.trim();
+        const cleanName = capitalize(trimName);
+        return cleanName;
+    });
+    const firstName = cleanNameArr[0];
+    if (cleanNameArr.length === 2) {
+        const lastName = cleanNameArr[1];
+        console.log(`Length is 2, first name is ${firstName}, last name is ${lastName}`);
+        return { firstName, lastName }
+    }
+
+    if (cleanNameArr.length === 3) {
+        if (cleanNameArr[1].includes(`"`)) {
+            const nickName = cleanNameArr[1];
+            const lastName = cleanNameArr[2];
+            // console.log(`Length is three, has " , firstName ${firstName}, nickname ${nickName}, lastName ${lastName}`)
+            return { firstName, nickName, lastName };
+        } else {
+            const middleName = cleanNameArr[1];
+            const lastName = cleanNameArr[2];
+            // console.log(`Length is three, no " , firstName ${firstName}, middlename ${middleName}, lastName ${lastName}`)
+            return { firstName, middleName, lastName };
+        }
+    } else { return { firstName }; }
+}
+
+function capitalize(string) {
+    if (string.includes(`"`)) {
+        const capString =
+            `"` +
+            string[1].toUpperCase() +
+            string.substring(2, string.lastIndexOf(`"`)).toLowerCase() +
+            `"`;
+        return capString;
+    }
+    if (string.includes("-")) {
+        const hyphPos = string.indexOf("-");
+        const capString =
+            string[0].toUpperCase() +
+            string.substring(1, hyphPos + 1).toLowerCase() +
+            string.charAt(hyphPos + 1).toUpperCase() +
+            string.substring(hyphPos + 2).toLowerCase();
+        return capString;
+    } else {
+        const capString =
+            string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
+        return capString;
+    }
+}
+
+function prepareObjects(jsonData) {
+    console.log(jsonData);
+    allStudents = jsonData.map(prepareObject());
+
+    buildList();
+}
+
+// function prepareObject(jsonObject) {
+//     const student = Object.create(Student);
+//     // const texts = jsonObject.fullname.split(" ");
+//     student.firstName = ;
+//     student.middleName = jsonObject. ;
+// student.lastName = jsonObject. ;
+// student.nickName = jsonObject. ;
+// student.house = jsonObject. ;
+// student.blood =
+// student.prefect =
+// student.inquisitor =
+// student.expelled =
+// }
+
+function selectFilter(event) {
+    const filter = event.target.dataset.filter;
+    console.log(`user selected ${filter}`);
+    // filterList(filter);
+    setFilter(filter);
+}
+
+function setFilter(filter) {
+    settings.filterBy = filter;
+    buildList();
+}
+
+function filterList(filteredList) {
+    if (settings.filterBy != "*") {
+        filteredList = allStudents.filter(isAnimalType);
+    } else {
+        filteredList = allStudents;
+    }
+
+    function isAnimalType(student) {
+        if (student.type === settings.filterBy) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    return filteredList;
+}
+
+function selectSort(event) {
+    const sortBy = event.target.dataset.sort;
+    const sortDir = event.target.dataset.sortDirection;
+    // find old sortBy elelment
+    const oldElement = document.querySelector(`[data-sort='${settings.sortBy}']`);
+    oldElement.classList.remove("sortby");
+    // indicate active sort
+    event.target.classList.add("sortby");
+    // toggle direction
+    if (sortDir === "asc") {
+        event.target.dataset.sortDirection = "desc";
+    } else {
+        event.target.dataset.sortDirection = "asc";
+    }
+    console.log(`User selected ${settings.sortBy} - ${settings.sortDir}`);
+    setSort(sortBy, sortDir);
+}
+
+function setSort(sortBy, sortDir) {
+    settings.sortBy = sortBy;
+    settings.sortDir = sortDir;
+    buildList();
+}
+
+function sortList(sortedList) {
+    let direction = 1;
+
+    if (settings.sortDir === "desc") {
+        direction = -1;
+    } else {
+        direction = 1;
+    }
+
+    sortedList = sortedList.sort(sortByProperty);
+
+    function sortByProperty(studentA, studentB) {
+        if (studentA[settings.sortBy] < studentB[settings.sortBy]) {
+            return -1 * direction;
+        } else {
+            return 1 * direction;
+        }
+    }
+    return sortedList;
+}
+
+function buildList() {
+    const currentList = filterList(allstudents);
+    const sortedList = sortList(currentList);
+    displayList(sortedList);
+}
+
+function displayList(students) {
+    // clear the display
+    document.querySelector("#list tbody").innerHTML = "";
+
+    // build a new list
+    students.forEach(displayAnimal);
+}
+
+function displayStudent(student) {
+    // create clone
+    const clone = document
+        .querySelector("template#student")
+        .content.cloneNode(true);
+
+    // set clone data
+
+    // TODO: Show star ⭐ or ☆
+    clone.querySelector("[data-field=name]").textContent = student.name;
+    clone.querySelector("[data-field=desc]").textContent = student.desc;
+    clone.querySelector("[data-field=type]").textContent = student.type;
+    clone.querySelector("[data-field=age]").textContent = student.age;
+    if (student.star === true) {
+        clone.querySelector("[data-field=star").textContent = "⭐";
+    } else {
+        clone.querySelector("[data-field=star").textContent = "☆";
+    }
+
+    // TODO: Add event listener to click on star
+    clone
+        .querySelector("[data-field=star]")
+        .addEventListener("click", toggleStar);
+
+    function toggleStar() {
+        if (student.star) {
+            student.star = false;
+        } else {
+            student.star = true;
+        }
+        buildList();
+    }
+
+    clone.querySelector(`[data-field='winner']`).dataset.winner = student.winner;
+    clone
+        .querySelector(`[data-field='winner']`)
+        .addEventListener("click", toggleWinner);
+
+    function toggleWinner() {
+        if (student.winner) {
+            student.winner = false;
+        } else {
+            tryToMakeWinner(student);
+        }
+        buildList();
+    }
+    // append clone to list
+    document.querySelector("#list tbody").appendChild(clone);
+}
+
+function tryToMakeWinner(selectedstudent) {
+    const winners = allstudents.filter((student) => student.winner);
+
+    const numberOfWinners = winners.length;
+    const other = winners
+        .filter((student) => student.type === selectedStudent.type)
+        .shift();
+    // if there is another of the same type
+    if (other !== undefined) {
+        console.log("There can only be one winner of each type!");
+        removeOther(other);
+    } else if (numberOfWinners >= 2) {
+        console.log("There can only be two winners!");
+        removeAOrB(winners[0], winners[1]);
+    } else {
+        makeWinner(selectedStudent);
+    }
+    console.log(`There are ${numberOfWinners} winners`);
+
+    console.log(other);
+
+    function removeOther(other) {
+        // ask user to ignore or remove 'other'
+        document.querySelector("#onlyonekind").classList.remove("dialog");
+        document.querySelector("#onlyonekind").classList.add("dialog.show");
+        document
+            .querySelector("#onlyonekind .closebutton")
+            .addEventListener("click", closeDialog);
+        document
+            .querySelector("#removeother")
+            .addEventListener("click", clickRemoveOther);
+        document.querySelector(
+            "#removeother .student1"
+        ).textContent = `${other.name}?`;
+
+        // if ignore, do nothing
+
+        function closeDialog() {
+            document.querySelector("#onlyonekind").classList.add("dialog");
+            document
+                .querySelector("#onlyonekind .closebutton")
+                .removeEventListener("click", closeDialog);
+            document
+                .querySelector("#removeother")
+                .removeEventListener("click", clickRemoveOther);
+        }
+        // if remove other:
+
+        function clickRemoveOther() {
+            console.log("removeOther is clicked");
+            removePrevWinner(other);
+            makeWinner(selectedStudent);
+            buildList();
+            closeDialog();
+        }
+    }
+
+    function removeAOrB(winnerA, winnerB) {
+        document.querySelector("#onlytwowinners").classList.remove("dialog");
+        document.querySelector("#onlytwowinners").classList.add("dialog.show");
+        document
+            .querySelector("#onlytwowinners .closebutton")
+            .addEventListener("click", closeDialog);
+        document.querySelector("#removeA").addEventListener("click", clickRemoveA);
+        document.querySelector("#removeB").addEventListener("click", clickRemoveB);
+        document.querySelector(
+            "#removeA [data-field=winnerA]"
+        ).textContent = `${winnerA.name} the ${winnerA.type}`;
+        document.querySelector(
+            "#removeB [data-field=winnerB]"
+        ).textContent = `${winnerB.name} the ${winnerB.type}`;
+
+        function closeDialog() {
+            document.querySelector("#onlytwowinners").classList.add("dialog");
+            document.querySelector("#onlytwowinners").classList.remove("dialog.show");
+            document
+                .querySelector("#onlytwowinners .closebutton")
+                .removeEventListener("click", closeDialog);
+            document
+                .querySelector("#removeA")
+                .removeEventListener("click", clickRemoveA);
+            document
+                .querySelector("#removeB")
+                .removeEventListener("click", clickRemoveB);
+        }
+
+        function clickRemoveA() {
+            removePrevWinner(winnerA);
+            makeWinner(selectedStudent);
+            buildList();
+            closeDialog();
+        }
+
+        function clickRemoveB() {
+            removePrevWinner(winnerB);
+            makeWinner(selectedStudent);
+            buildList();
+            closeDialog();
+        }
+    }
+
+    function removePrevWinner(winnerAnimal) {
+        winnerAnimal.winner = false;
+    }
+
+    function makeWinner(animal) {
+        animal.winner = true;
+    }
+}

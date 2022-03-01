@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hogwarts Student List</title>
     <link rel="stylesheet" href="style.css">
-    <script src="./script4.js"></script>
+    <script src="./bigscript.js" defer></script>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
         <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
     </p> -->
 
-    <hr />
+    <!-- <hr /> -->
 
     <table id="list">
         <thead>
@@ -33,9 +33,9 @@
                     First name
                 </th>
                 <th data-action="sort" data-sort-direction="asc" data-sort="house">
-                    House <label for="houses">Show:</label>
-                    <select name="houses" id="houses">
-              <option value="all">All houses</option>
+                    House
+                    <select name="houses" id="housesDrop">
+              <option data-action="filter" data-filter="all"value="all">All houses</option>
               <option data-action="filter" data-filter="gryffindor" value="gryffindor">Gryffindor</option>
               <option data-action="filter" data-filter="ravenclaw" value="hufflepuff">Hufflepuff</option>
               <option data-action="filter" data-filter="hufflepuff" value="ravenclaw">Ravenclaw</option>
@@ -44,6 +44,12 @@
                 </th>
                 <th data-action="sort" data-sort-direction="asc" data-sort="blood">
                     Blood status
+                </th>
+                <th data-action="sort" data-sort-direction="asc" data-sort="prefect">
+                    Prefect
+                </th>
+                <th data-action="sort" data-sort-direction="asc" data-sort="inquisitor">
+                    Inquisitorial Squad
                 </th>
             </tr>
         </thead>
@@ -60,7 +66,7 @@
     </template>
     <!-- modal popup -->
     <div class="modal">
-        <div class="modalcontent">
+        <div class="modalcontent hidden">
             <div class="hidden redstamp">Expelled</div>
             <img src="" alt="" />
             <ul>
@@ -73,9 +79,9 @@
                 <li>Prefect:<span class=""></span></li>
                 <li>Inquisitorial Squad<span class=""></span></li>
             </ul>
-            <button id="makePrefect">Appoint as Prefect</button>
+            <button id="makePrefect" class="odd">Appoint as Prefect</button>
             <button id="inquisitorial">Add to Inquisitorial Squad</button>
-            <button id="expel">Expel student</button>
+            <button id="expel" class="odd">Expel student</button>
             <button id="back" class="closebutton">Back to list</button>
         </div>
     </div>
@@ -85,14 +91,14 @@
     <div id="onlytwoprefects" class="dialog hidden">
         <div class="dialogcontent">
             <h1>There can only be two prefects for each house!</h1>
-            <h2>Remove one, if you wish to you appoint another</h2>
+            <h2>Remove one, if you wish to you appoint another.</h2>
             <p>
-                <button id="removeA" data-action="remove1">
+                <button id="removeA" class="even" data-action="remove1">
             Remove <span data-field="prefectA">Name</span>?
           </button>
             </p>
             <p>
-                <button id="removeB" data-action="remove2">
+                <button id="removeB" class="odd" data-action="remove2">
             Remove <span data-field="winnerB">Name</span>?
           </button>
             </p>
@@ -106,7 +112,7 @@
             <h1>There may only be one boy and one girl prefect in each house.</h1>
             <h2>Remove one, if you wish to appoint a new one</h2>
             <p>
-                <button id="removeother" data-action="remove1">
+                <button id="removeother" class="odd" data-action="remove1">
             Remove <span class="prefect1">Name</span>?
           </button>
             </p>
@@ -139,8 +145,6 @@
             <button class="closebutton">I see.</button>
         </div>
     </div>
-
-    <script src="animalwinners2.js"></script>
 </body>
 
 </html>
