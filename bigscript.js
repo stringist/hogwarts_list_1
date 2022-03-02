@@ -157,8 +157,6 @@ function toggleName() {
 
 function selectFilter(event) {
     const filter = event.target.dataset.filter;
-    // console.log(`selectFilter: user selected ${filter}`);
-    // filterList(filter);
     setFilter(filter);
 }
 
@@ -192,12 +190,14 @@ function filterList(filteredList) {
 }
 
 function selectSort(event) {
+    console.log(`global sortBy going into selectsort is ${settings.sortBy}`)
     const sortBy = event.target.dataset.sort;
     const sortDir = event.target.dataset.sortDirection;
     console.log(
         `select sort function sortby is ${sortBy}, sortDir is ${sortDir}`
     );
     // find old sortBy elelment
+    console.log(`oldElememt is [data-sort='${settings.sortBy}']`);
     const oldElement = document.querySelector(`[data-sort='${settings.sortBy}']`);
     oldElement.classList.remove("sortby");
     // indicate active sort
@@ -227,13 +227,12 @@ function sortList(sortedList) {
         direction = 1;
     }
 
-    if (settings.sortBy === "name" && settings.firstNamelastName === true) {
-        sortedList = sortedList.sort(sortByFirstName);
-    } else if (
-        settings.sortBy === "name" &&
-        settings.firstNamelastName !== true
-    ) {
-        sortedList = sortedList.sort(sortByLastName);
+    if (settings.sortBy === "name") {
+        if (settings.firstNamelastName === true) {
+            sortedList = sortedList.sort(sortByFirstName);
+        } else {
+            sortedList = sortedList.sort(sortByLastName);
+        }
     } else {
         sortedList = sortedList.sort(sortByProperty);
     }
@@ -244,7 +243,6 @@ function sortList(sortedList) {
         } else {
             return 1 * direction;
         }
-
     }
 
     function sortByLastName(studentA, studentB) {
@@ -295,43 +293,7 @@ function displayStudent(student) {
     }
 
     clone.querySelector("[data-field=house]").textContent = student.house;
-    clone.querySelector("[data-field=house]").textContent = student.house;
-    clone.querySelector("[data-field=house]").textContent = student.house;
-    clone.querySelector("[data-field=house]").textContent = student.house;
-    // clone.querySelector("[data-field=blood]").textContent = student.age;
-    // if (student.star === true) {
-    //     clone.querySelector("[data-field=star").textContent = "⭐";
-    // } else {
-    //     clone.querySelector("[data-field=star").textContent = "☆";
-    // }
 
-    // TODO: Add event listener to click on star
-    // clone
-    //     .querySelector("[data-field=star]")
-    //     .addEventListener("click", toggleStar);
-
-    // function toggleStar() {
-    //     if (student.star) {
-    //         student.star = false;
-    //     } else {
-    //         student.star = true;
-    //     }
-    //     buildList();
-    // }
-
-    // clone.querySelector(`[data-field='winner']`).dataset.winner = student.winner;
-    // clone
-    //     .querySelector(`[data-field='winner']`)
-    //     .addEventListener("click", toggleWinner);
-
-    // function toggleWinner() {
-    //     if (student.winner) {
-    //         student.winner = false;
-    //     } else {
-    //         tryToMakeWinner(student);
-    //     }
-    //     buildList();
-    // }
     // // append clone to list
     document.querySelector("#list tbody").appendChild(clone);
 }
