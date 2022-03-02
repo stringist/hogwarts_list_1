@@ -35,16 +35,8 @@ function start() {
 }
 
 function addEventListeners() {
-    // to do: get input from house dropdown
-    // const filterOptions = document.querySelector("[data-action=filter]");
     const sortingButtons = document.querySelectorAll("[data-action=sort]");
-    // const houseDrop = document.querySelector("#housesDrop");
     const filterOptions = document.querySelectorAll("[data-action=filter]");
-    console.log(filterOptions[1].value);
-    // const houseValue = houseDrop.options[houseDrop.selectedIndex].value;
-
-    // const nameToggle = document.querySelector("#nametoggle");
-    // nameToggle.addEventListener("click", toggleName);
 
     filterOptions.forEach((option) => {
         option.addEventListener("click", selectFilter);
@@ -53,6 +45,9 @@ function addEventListeners() {
     sortingButtons.forEach((category) => {
         category.addEventListener("click", selectSort);
     });
+
+    const nameToggle = document.querySelector("#nametoggle");
+    nameToggle.addEventListener("click", toggleName);
 }
 
 async function loadJSON() {
@@ -64,9 +59,9 @@ async function loadJSON() {
 
 // cleaning the data
 function cleanData(jsonData) {
-    jsonData.forEach(obj => {
+    jsonData.forEach((obj) => {
         obj.fullname = getNameParts(obj);
-        obj.house = cleanHouse(obj)
+        obj.house = cleanHouse(obj);
     });
     prepareObjects(jsonData);
 }
@@ -95,14 +90,15 @@ function getNameParts(jsonObject) {
             const lastName = cleanNameArr[2];
             return { firstName, middleName, lastName };
         }
-    } else { return { firstName } }
+    } else {
+        return { firstName };
+    }
 }
 
 function cleanHouse(jsonObj) {
     const house = jsonObj.house.trim();
     const cleanHouse = capitalize(house);
     return cleanHouse;
-
 }
 
 function capitalize(string) {
@@ -173,32 +169,34 @@ function setFilter(filter) {
 
 function filterList(filteredList) {
     console.log("filterList global filterBy is", settings.filterBy);
-    if (settings.filterBy === "gryffindor" || settings.filterBy === "hufflepuff" || settings.filterBy === "ravenclaw" || settings.filterBy === "slytherin") {
+    if (
+        settings.filterBy === "gryffindor" ||
+        settings.filterBy === "hufflepuff" ||
+        settings.filterBy === "ravenclaw" ||
+        settings.filterBy === "slytherin"
+    ) {
         filteredList = allStudents.filter(houseFilter);
-        console.log("filterList is now ", filteredList);
     } else {
-        console.log("they elsed me!")
-            // filteredList = allStudents;
+        filteredList = allStudents;
     }
 
     function houseFilter(student) {
         console.log(student);
         if (student.house.toLowerCase() === settings.filterBy) {
-            console.log(`houseFilter sez student house is ${student.house} and filterby is ${settings.filterBy}`)
             return true;
         } else {
-
             return false;
         }
     }
     return filteredList;
 }
 
-
 function selectSort(event) {
     const sortBy = event.target.dataset.sort;
     const sortDir = event.target.dataset.sortDirection;
-    console.log(`select sort function sortby is ${sortBy}, sortDir is ${sortDir}`);
+    console.log(
+        `select sort function sortby is ${sortBy}, sortDir is ${sortDir}`
+    );
     // find old sortBy elelment
     const oldElement = document.querySelector(`[data-sort='${settings.sortBy}']`);
     oldElement.classList.remove("sortby");
@@ -229,7 +227,33 @@ function sortList(sortedList) {
         direction = 1;
     }
 
-    sortedList = sortedList.sort(sortByProperty);
+    if (settings.sortBy === "name" && settings.firstNamelastName === true) {
+        sortedList = sortedList.sort(sortByFirstName);
+    } else if (
+        settings.sortBy === "name" &&
+        settings.firstNamelastName !== true
+    ) {
+        sortedList = sortedList.sort(sortByLastName);
+    } else {
+        sortedList = sortedList.sort(sortByProperty);
+    }
+
+    function sortByFirstName(studentA, studentB) {
+        if (studentA.firstName < studentB.firstName) {
+            return -1 * direction;
+        } else {
+            return 1 * direction;
+        }
+
+    }
+
+    function sortByLastName(studentA, studentB) {
+        if (studentA.lastName < studentB.lastName) {
+            return -1 * direction;
+        } else {
+            return 1 * direction;
+        }
+    }
 
     function sortByProperty(studentA, studentB) {
         if (studentA[settings.sortBy] < studentB[settings.sortBy]) {
@@ -255,20 +279,20 @@ function displayList(students) {
     students.forEach(displayStudent);
 }
 
-
 function displayStudent(student) {
     // create clone
-    const clone = document.querySelector("template#studentTable")
+    const clone = document
+        .querySelector("template#studentTable")
         .content.cloneNode(true);
 
     // set clone data
-    if (settings.firstNamelastName === true) { clone.querySelector("[data-field=name]").textContent = student.firstName + " " + student.lastName; } else { clone.querySelector("[data-field=name]").textContent = student.lastName + ", " + student.firstName; }
-
-
-
-
-
-
+    if (settings.firstNamelastName === true) {
+        clone.querySelector("[data-field=name]").textContent =
+            student.firstName + " " + student.lastName;
+    } else {
+        clone.querySelector("[data-field=name]").textContent =
+            student.lastName + ", " + student.firstName;
+    }
 
     clone.querySelector("[data-field=house]").textContent = student.house;
     clone.querySelector("[data-field=house]").textContent = student.house;
