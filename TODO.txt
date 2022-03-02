@@ -16,3 +16,4 @@ display as lastname, firstname, or firstname, lastname
 controller 
 connect directional arrows
 (view) use conditions to change display
+separate toggle swtches and menus from sort triggers

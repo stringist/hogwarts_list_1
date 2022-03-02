@@ -13,7 +13,13 @@
 <body>
     <h1>List of Students</h1>
 
-
+    <!-- <p>
+        Filter:
+        <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
+        <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
+        <button class="filter" data-action="filter" data-filter="hufflepuff">HufflePuff</button>
+        <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
+    </p> -->
 
     <!-- <hr /> -->
 
@@ -22,12 +28,12 @@
             <tr id="sorting">
                 <th data-action="sort" data-sort-direction="asc" data-sort="name">
                     Name
-                    <span id="nametoggle">First ⇋ Last </span>
+                    <div id="nametoggle">First ⇋ Last </div>
                 </th>
 
                 <th data-action="sort" data-sort-direction="asc" data-sort="house">
                     House
-                    <select name="houses" id="housesDrop">
+                    <div class="menu"> <select name="houses" id="housesDrop"></div>
               <option data-action="filter" data-filter="all"value="all">All houses</option>
               <option data-action="filter" data-filter="gryffindor" value="gryffindor">Gryffindor</option>
               <option data-action="filter" data-filter="ravenclaw" value="hufflepuff">Hufflepuff</option>

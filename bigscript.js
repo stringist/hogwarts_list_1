@@ -38,21 +38,21 @@ function addEventListeners() {
     // to do: get input from house dropdown
     // const filterOptions = document.querySelector("[data-action=filter]");
     const sortingButtons = document.querySelectorAll("[data-action=sort]");
-    const houseDrop = document.querySelector("#housesDrop");
-    const houseFilter = houseDrop.options;
-    console.log(houseFilter);
-    // const houseValue = dropDown.options[dropDown.selectedIndex].value;
+    // const houseDrop = document.querySelector("#housesDrop");
+    const filterOptions = document.querySelectorAll("[data-action=filter]");
+    console.log(filterOptions[1].value);
+    // const houseValue = houseDrop.options[houseDrop.selectedIndex].value;
 
-    // houseFilter.forEach((option) => {
-    //     option.addEventListener("click", selectFilter);
-    // });
+    // const nameToggle = document.querySelector("#nametoggle");
+    // nameToggle.addEventListener("click", toggleName);
 
-    sortingButtons.forEach((category) => {
-        category.addEventListener("click", selectSort);
+    filterOptions.forEach((option) => {
+        option.addEventListener("click", selectFilter);
     });
 
-    const nameToggle = document.querySelector("#nametoggle");
-    nameToggle.addEventListener("click", toggleName)
+    // sortingButtons.forEach((category) => {
+    //     category.addEventListener("click", selectSort);
+    // });
 }
 
 async function loadJSON() {
@@ -68,12 +68,6 @@ function cleanData(jsonData) {
         obj.fullname = getNameParts(obj);
         obj.house = cleanHouse(obj)
     });
-    // jsonData.forEach(obj => { return cleanHouse(obj) });
-    // jsonData.forEach(object => { return object.gender });
-    // const nameArr = jsonData.map(getNameParts);
-    // const houseArr = jsonData.map(cleanHouse);
-    // const genderArr = jsonData.map(object => { return object.gender });
-    console.log(jsonData);
     prepareObjects(jsonData);
 }
 
@@ -162,11 +156,12 @@ function toggleName() {
         settings.firstNamelastName = true;
         document.querySelector("#nametoggle").textContent = "First ⇋ Last";
     }
+    buildList();
 }
 
 function selectFilter(event) {
     const filter = event.target.dataset.filter;
-    console.log(`user selected ${filter}`);
+    console.log(`Filter: user selected ${filter}`);
     // filterList(filter);
     setFilter(filter);
 }
@@ -177,14 +172,15 @@ function setFilter(filter) {
 }
 
 function filterList(filteredList) {
+    console.log("Filter by ", settings.filterBy);
     if (settings.filterBy != "*") {
-        filteredList = allStudents.filter(isAnimalType);
+        filteredList = allStudents.filter(isInHouse);
     } else {
         filteredList = allStudents;
     }
 
-    function isAnimalType(student) {
-        if (student.type === settings.filterBy) {
+    function isInHouse(student) {
+        if (student.house === settings.filterBy) {
             return true;
         } else {
             return false;
@@ -196,6 +192,7 @@ function filterList(filteredList) {
 function selectSort(event) {
     const sortBy = event.target.dataset.sort;
     const sortDir = event.target.dataset.sortDirection;
+    console.log(`select sort function sortby is ${sortBy}, sortDir is ${sortDir}`);
     // find old sortBy elelment
     const oldElement = document.querySelector(`[data-sort='${settings.sortBy}']`);
     oldElement.classList.remove("sortby");
@@ -259,9 +256,13 @@ function displayStudent(student) {
         .content.cloneNode(true);
 
     // set clone data
+    if (settings.firstNamelastName === true) { clone.querySelector("[data-field=name]").textContent = student.firstName + " " + student.lastName; } else { clone.querySelector("[data-field=name]").textContent = student.lastName + ", " + student.firstName; }
 
 
-    clone.querySelector("[data-field=name]").textContent = student.lastName + ", " + student.firstName;
+
+
+
+
 
     clone.querySelector("[data-field=house]").textContent = student.house;
     clone.querySelector("[data-field=house]").textContent = student.house;
@@ -305,7 +306,7 @@ function displayStudent(student) {
     document.querySelector("#list tbody").appendChild(clone);
 }
 
-function tryToMakeWinner(selectedstudent) {
+function tryToMakePrefect(selectedstudent) {
     const winners = allstudents.filter((student) => student.winner);
 
     const numberOfWinners = winners.length;
