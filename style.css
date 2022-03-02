@@ -108,6 +108,10 @@ button {
     transform: rotate(2deg);
 }
 
+[data-action] {
+    cursor: pointer;
+}
+
 table {
     margin: auto 2rem auto 2rem;
 }
@@ -116,6 +120,20 @@ tr {
     font-family: var(--cursive);
     font-size: 2rem;
     text-align: center;
+}
+
+#sorting th.sortby[data-sort-direction="asc"]::after {
+    content: "▼";
+}
+
+#sorting th.sortby[data-sort-direction="desc"]::after {
+    content: "▲"
+}
+
+#nametoggle {
+    font-size: 1rem;
+    padding: 1rem;
+    cursor: pointer;
 }
 
 .hidden {

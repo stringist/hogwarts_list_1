@@ -11,6 +11,7 @@ const settings = {
     sortBy: "name",
     sortDir: "asc",
     hacked: false,
+    firstNamelastName: true,
 };
 
 // The prototype for all sudents:
@@ -49,6 +50,9 @@ function addEventListeners() {
     sortingButtons.forEach((category) => {
         category.addEventListener("click", selectSort);
     });
+
+    const nameToggle = document.querySelector("#nametoggle");
+    nameToggle.addEventListener("click", toggleName)
 }
 
 async function loadJSON() {
@@ -150,6 +154,15 @@ function prepareObject(jsonObject) {
     return student;
 }
 
+function toggleName() {
+    if (settings.firstNamelastName === true) {
+        settings.firstNamelastName = false;
+        document.querySelector("#nametoggle").textContent = "Last ⇋ First";
+    } else {
+        settings.firstNamelastName = true;
+        document.querySelector("#nametoggle").textContent = "First ⇋ Last";
+    }
+}
 
 function selectFilter(event) {
     const filter = event.target.dataset.filter;
@@ -248,8 +261,8 @@ function displayStudent(student) {
     // set clone data
 
 
-    clone.querySelector("[data-field=lastName]").textContent = student.lastName;
-    clone.querySelector("[data-field=firstName]").textContent = student.firstName;
+    clone.querySelector("[data-field=name]").textContent = student.lastName + ", " + student.firstName;
+
     clone.querySelector("[data-field=house]").textContent = student.house;
     clone.querySelector("[data-field=house]").textContent = student.house;
     clone.querySelector("[data-field=house]").textContent = student.house;

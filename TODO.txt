@@ -3,3 +3,16 @@ get input from drop down menu
 build clean data group
 build to show list
 clean house & gender data
+
+
+
+
+
+view
+make one name column thead
+add <--> and ^ and dir arrows
+display as lastname, firstname, or firstname, lastname
+
+controller 
+connect directional arrows
+(view) use conditions to change display

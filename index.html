@@ -13,25 +13,18 @@
 <body>
     <h1>List of Students</h1>
 
-    <!-- <p>
-        Filter:
-        <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
-        <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
-        <button class="filter" data-action="filter" data-filter="hufflepuff">HufflePuff</button>
-        <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
-    </p> -->
+
 
     <!-- <hr /> -->
 
     <table id="list">
         <thead>
             <tr id="sorting">
-                <th data-action="sort" data-sort-direction="asc" data-sort="lastName">
-                    Surname
+                <th data-action="sort" data-sort-direction="asc" data-sort="name">
+                    Name
+                    <span id="nametoggle">First ⇋ Last </span>
                 </th>
-                <th data-action="sort" data-sort-direction="asc" data-sort="firstName">
-                    First name
-                </th>
+
                 <th data-action="sort" data-sort-direction="asc" data-sort="house">
                     House
                     <select name="houses" id="housesDrop">
@@ -46,11 +39,9 @@
                     Blood status
                 </th>
                 <th data-action="sort" data-sort-direction="asc" data-sort="prefect">
-                    Prefect
+                    Distinctions
                 </th>
-                <th data-action="sort" data-sort-direction="asc" data-sort="inquisitor">
-                    Inquisitorial<br> Squad
-                </th>
+
             </tr>
         </thead>
         <tbody>
@@ -59,9 +50,8 @@
     </table>
     <template id="studentTable">
       <tr>
-        <td data-field="lastName">Last Name</td>
-        <td data-field="firstName">First Name</td>
-        <td data-field="house">House</td>
+        <td data-field="name">full name</td>
+    <td data-field="house">House</td>
         <td data-field="blood">Blood Status</td>
         <td data-field="prefect">prefect</td>
         <td data-field="inquisitor">inquisitorial squad</td>
