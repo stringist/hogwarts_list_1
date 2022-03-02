@@ -140,6 +140,37 @@ tr {
     display: none;
 }
 
+[data-field="distinction"] {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.prefect_container {
+    background-image: url("./assets/SVG/prefect_unselected.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 35px;
+    height: 35px;
+}
+
+.prefect_selected {
+    background-image: url("./assets/SVG/prefect_icon.svg")
+}
+
+.squad_container {
+    background-image: url("./assets/SVG/squad_unselected.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 35px;
+    height: 35px
+}
+
+.squad_selected {
+    background-image: url("./assets/SVG/squad_icon.svg");
+}
+
 .odd {
     border-width: 3px 2px 5px 5px;
     border-radius: 4% 95% 6% 95%/95% 4% 92% 5%;
