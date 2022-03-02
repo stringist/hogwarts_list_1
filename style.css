@@ -75,8 +75,14 @@ ul {
     list-style: none;
     font-family: var(--headline);
     font-size: 1.5rem;
+    /* columns: 2; */
     columns: 2;
-    max-width: 50vw;
+    margin: 2rem auto 4rem auto;
+}
+
+ul>li>span {
+    font-family: var(--cursive);
+    font-size: 4rem;
 }
 
 label {
@@ -106,9 +112,11 @@ button {
     border-width: 5px 3px 3px 5px;
     border-radius: 95% 4% 97% 5%/4% 94% 3% 95%;
     transform: rotate(2deg);
+    cursor: pointer;
 }
 
-[data-action] {
+[data-action],
+[data-field=name] {
     cursor: pointer;
 }
 
@@ -138,6 +146,10 @@ tr {
 
 .hidden {
     display: none;
+}
+
+.shadeOut {
+    filter: grayscale(80%) brightness(20%);
 }
 
 [data-field="distinctions"] {
@@ -203,9 +215,20 @@ tr {
 .modalcontent,
 .dialog {
     max-width: 100%;
+    /* text-align: center; */
 }
 
 .dialog h1 {
     font-family: var(--cursive);
     font-size: 5rem;
+}
+
+div.modal {
+    position: absolute;
+    top: 10vw;
+    left: 10%;
+    width: 80vw;
+    height: 60vw;
+    background-image: url("./assets/parchment2.png");
+    background-size: contain;
 }

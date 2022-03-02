@@ -188,7 +188,7 @@ function filterList(filteredList) {
 }
 
 function selectSort(event) {
-    console.log(`global sortBy going into selectsort is ${settings.sortBy}`)
+    console.log(`global sortBy going into selectsort is ${settings.sortBy}`);
     const sortBy = event.target.dataset.sort;
     const sortDir = event.target.dataset.sortDirection;
     console.log(
@@ -211,7 +211,7 @@ function selectSort(event) {
 }
 
 function setSort(sortBy, sortDir) {
-    console.log(`setSort sortBY is ${sortBy}, sortDir is ${sortDir}`)
+    console.log(`setSort sortBY is ${sortBy}, sortDir is ${sortDir}`);
     settings.sortBy = sortBy;
     settings.sortDir = sortDir;
     buildList();
@@ -295,7 +295,9 @@ function displayStudent(student) {
     if (student.prefect === true) {
         clone.querySelector(".prefect_container").classList.add("prefect_selected");
     } else {
-        clone.querySelector(".prefect_container").classList.remove("prefect_selected");
+        clone
+            .querySelector(".prefect_container")
+            .classList.remove("prefect_selected");
     }
 
     if (student.squad === true) {
@@ -303,21 +305,26 @@ function displayStudent(student) {
     } else {
         clone.querySelector(".squad_container").classList.remove("squad_selected");
     }
+
     // TODO: Add event listener to click on prefect
-    clone.querySelector(".prefect_container").addEventListener("click", togglePrefect);
+    clone
+        .querySelector(".prefect_container")
+        .addEventListener("click", togglePrefect);
 
     function togglePrefect() {
         if (student.prefect) {
             student.prefect = false;
         } else {
             // TO DO: add conditions/make prefect function
-            // student.prefect = true;
-            tryToMakePrefect(student);
+            student.prefect = true;
+            // tryToMakePrefect(student);
         }
         buildList();
     }
 
-    clone.querySelector(".squad_container").addEventListener("click", toggleSquad);
+    clone
+        .querySelector(".squad_container")
+        .addEventListener("click", toggleSquad);
 
     function toggleSquad() {
         if (student.squad) {
@@ -328,13 +335,76 @@ function displayStudent(student) {
         }
         buildList();
     }
+
+    clone
+        .querySelector(`[data-field=name]`)
+        .addEventListener("click", detailsPopUp);
+
+    function detailsPopUp() {
+        // add event listeners
+
+        document.querySelector(".modal").classList.remove("hidden");
+        // document.querySelector("#makePrefect").addEventListener("click", tryToMakePrefect);
+        // document.querySelector("#inquisitorial").addEventListener("click", tryToAddToSquad);
+        // document.querySelector("#expel").addEventListener("click", tryToExpel);
+        document
+            .querySelector("button.closebutton")
+            .addEventListener("click", closeDetails);
+        // fill in details:
+        document.querySelector("#detailFirstName").textContent =
+            " " + student.firstName;
+        if (student.middleName !== undefined) {
+            document.querySelector("#detailMiddleName").textContent =
+                " " + student.MiddleName;
+        } else {
+            document.querySelector("#detailMiddleName").textContent = " -----";
+        }
+        if (student.lastName !== undefined) {
+            document.querySelector("#detailSurname").textContent =
+                " " + student.lastName;
+        } else {
+            document.querySelector("#detailSurname").textContent = " -----";
+        }
+        if (student.nickName !== undefined) {
+            document.querySelector("#detailnickName").textContent =
+                " " + student.nickName;
+        } else {
+            document.querySelector("#detailNickname").textContent = " -----";
+        }
+        document.querySelector("#detailHouse").textContent = " " + student.house;
+        document.querySelector("#detailBlood").textContent = "";
+        if (student.prefect) {
+            document.querySelector("#detailPrefect").textContent = " yes";
+        } else {
+            document.querySelector("#detailPrefect").textContent = " -----";
+        }
+        if (student.squad) {
+            document.querySelector("#detailSquad").textContent = " yes";
+        } else {
+            document.querySelector("#detailPrefect").textContent = " -----";
+        }
+
+
+
+        function closeDetails() {
+            document.querySelector(".modal").classList.add("hidden");
+
+            document
+                .querySelector("#makePrefect")
+                .removeEventListener("click", tryToMakePrefect);
+            // document.querySelector("#inquisitorial").removeEventListener("click", tryToAddToSquad);
+            // document.querySelector("#expel").removeEventListener("click", tryToExpel);
+            document
+                .querySelector("button.closebutton")
+                .removeEventListener("click", closeDetails);
+        }
+    }
     // // append clone to list
     document.querySelector("#list tbody").appendChild(clone);
-
 }
 
 function tryToMakePrefect(selectedstudent) {
-    const prefects = allstudents.filter((student) => student.prefect);
+    const prefects = allStudents.filter((student) => student.prefect);
 
     const numberOfPrefects = prefects.length;
     const other = prefects
