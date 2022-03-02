@@ -113,12 +113,12 @@ button {
 }
 
 table {
-    margin: auto 2rem auto 2rem;
+    /* margin: auto 2rem auto 2rem; */
 }
 
 tr {
     font-family: var(--cursive);
-    font-size: 2rem;
+    font-size: 2.5rem;
     text-align: center;
 }
 
@@ -152,6 +152,7 @@ tr {
     background-repeat: no-repeat;
     width: 35px;
     height: 35px;
+    cursor: pointer;
 }
 
 .prefect_selected {
@@ -159,12 +160,13 @@ tr {
 }
 
 .squad_container {
-    background-image: url("./assets/SVG/squad_unselected.svg");
+    background-image: url("./assets/SVG/squad_unselected_2.svg");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     width: 35px;
-    height: 35px
+    height: 35px;
+    cursor: pointer;
 }
 
 .squad_selected {

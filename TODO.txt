@@ -19,3 +19,5 @@ connect directional arrows
 separate toggle swtches and menus from sort triggers
 
 *add if somewhere to catch undefined last name
+
+add tool tips?

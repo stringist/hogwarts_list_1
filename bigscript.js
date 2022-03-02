@@ -24,7 +24,7 @@ const Student = {
     blood: "",
     gender: "",
     prefect: false,
-    inquisitor: false,
+    squad: false,
     expelled: false,
 };
 
@@ -128,8 +128,8 @@ function capitalize(string) {
 function prepareObjects(jsonData) {
     allStudents = jsonData.map(prepareObject);
     console.table(allStudents);
-    // buildList();
-    displayList(allStudents);
+    buildList();
+    // displayList(allStudents);
 }
 
 function prepareObject(jsonObject) {
@@ -166,7 +166,6 @@ function setFilter(filter) {
 }
 
 function filterList(filteredList) {
-    console.log("filterList global filterBy is", settings.filterBy);
     if (
         settings.filterBy === "gryffindor" ||
         settings.filterBy === "hufflepuff" ||
@@ -293,9 +292,44 @@ function displayStudent(student) {
     }
 
     clone.querySelector("[data-field=house]").textContent = student.house;
+    if (student.prefect === true) {
+        clone.querySelector(".prefect_container").classList.add("prefect_selected");
+    } else {
+        clone.querySelector(".prefect_container").classList.remove("prefect_selected");
+    }
 
+    if (student.squad === true) {
+        clone.querySelector(".squad_container").classList.add("squad_selected");
+    } else {
+        clone.querySelector(".squad_container").classList.remove("squad_selected");
+    }
+    // TODO: Add event listener to click on prefect
+    clone.querySelector(".prefect_container").addEventListener("click", togglePrefect);
+
+    function togglePrefect() {
+        if (student.prefect) {
+            student.prefect = false;
+        } else {
+            // TO DO: add conditions/make prefect function
+            student.prefect = true;
+        }
+        buildList();
+    }
+
+    clone.querySelector(".squad_container").addEventListener("click", toggleSquad);
+
+    function toggleSquad() {
+        if (student.squad) {
+            student.squad = false;
+        } else {
+            // TO DO: add conditions/make prefect function
+            student.squad = true;
+        }
+        buildList();
+    }
     // // append clone to list
     document.querySelector("#list tbody").appendChild(clone);
+
 }
 
 function tryToMakePrefect(selectedstudent) {
