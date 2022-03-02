@@ -140,7 +140,7 @@ tr {
     display: none;
 }
 
-[data-field="distinction"] {
+[data-field="distinctions"] {
     display: flex;
     justify-content: space-evenly;
 }
