@@ -21,3 +21,7 @@ separate toggle swtches and menus from sort triggers
 *add if somewhere to catch undefined last name
 
 add tool tips?
+
+add conditions to prefects 
+add blood list, figure out blood algorithm
+

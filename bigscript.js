@@ -127,7 +127,6 @@ function capitalize(string) {
 
 function prepareObjects(jsonData) {
     allStudents = jsonData.map(prepareObject);
-    console.table(allStudents);
     buildList();
     // displayList(allStudents);
 }
@@ -212,6 +211,7 @@ function selectSort(event) {
 }
 
 function setSort(sortBy, sortDir) {
+    console.log(`setSort sortBY is ${sortBy}, sortDir is ${sortDir}`)
     settings.sortBy = sortBy;
     settings.sortDir = sortDir;
     buildList();
@@ -311,7 +311,8 @@ function displayStudent(student) {
             student.prefect = false;
         } else {
             // TO DO: add conditions/make prefect function
-            student.prefect = true;
+            // student.prefect = true;
+            tryToMakePrefect(student);
         }
         buildList();
     }
@@ -333,15 +334,15 @@ function displayStudent(student) {
 }
 
 function tryToMakePrefect(selectedstudent) {
-    const winners = allstudents.filter((student) => student.winner);
+    const prefects = allstudents.filter((student) => student.prefect);
 
-    const numberOfWinners = winners.length;
-    const other = winners
+    const numberOfPrefects = prefects.length;
+    const other = prefects
         .filter((student) => student.type === selectedStudent.type)
         .shift();
     // if there is another of the same type
     if (other !== undefined) {
-        console.log("There can only be one winner of each type!");
+        console.log("There can only be two prefect of each type!");
         removeOther(other);
     } else if (numberOfWinners >= 2) {
         console.log("There can only be two winners!");
