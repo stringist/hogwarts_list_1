@@ -50,9 +50,9 @@ function addEventListeners() {
         option.addEventListener("click", selectFilter);
     });
 
-    // sortingButtons.forEach((category) => {
-    //     category.addEventListener("click", selectSort);
-    // });
+    sortingButtons.forEach((category) => {
+        category.addEventListener("click", selectSort);
+    });
 }
 
 async function loadJSON() {
@@ -161,7 +161,7 @@ function toggleName() {
 
 function selectFilter(event) {
     const filter = event.target.dataset.filter;
-    console.log(`Filter: user selected ${filter}`);
+    // console.log(`selectFilter: user selected ${filter}`);
     // filterList(filter);
     setFilter(filter);
 }
@@ -172,22 +172,28 @@ function setFilter(filter) {
 }
 
 function filterList(filteredList) {
-    console.log("Filter by ", settings.filterBy);
-    if (settings.filterBy != "*") {
-        filteredList = allStudents.filter(isInHouse);
+    console.log("filterList global filterBy is", settings.filterBy);
+    if (settings.filterBy === "gryffindor" || settings.filterBy === "hufflepuff" || settings.filterBy === "ravenclaw" || settings.filterBy === "slytherin") {
+        filteredList = allStudents.filter(houseFilter);
+        console.log("filterList is now ", filteredList);
     } else {
-        filteredList = allStudents;
+        console.log("they elsed me!")
+            // filteredList = allStudents;
     }
 
-    function isInHouse(student) {
-        if (student.house === settings.filterBy) {
+    function houseFilter(student) {
+        console.log(student);
+        if (student.house.toLowerCase() === settings.filterBy) {
+            console.log(`houseFilter sez student house is ${student.house} and filterby is ${settings.filterBy}`)
             return true;
         } else {
+
             return false;
         }
     }
     return filteredList;
 }
+
 
 function selectSort(event) {
     const sortBy = event.target.dataset.sort;
