@@ -124,9 +124,11 @@ table {
     /* margin: auto 2rem auto 2rem; */
 }
 
-tr {
+td {
     font-family: var(--cursive);
     font-size: 2.5rem;
+    border-bottom: solid .5px black;
+    border-radius: 0 0 5px 5px;
     text-align: center;
 }
 
@@ -150,11 +152,6 @@ tr {
 
 .shadeOut {
     filter: grayscale(80%) brightness(20%);
-}
-
-[data-field="prefect"],
-[data-field="squad"] {
-    margin: auto;
 }
 
 .prefect_container {
@@ -202,15 +199,11 @@ tr {
 #sorting {
     /* display: flex; */
     min-width: 100%;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     border-bottom: solid 1px var(--darkred);
     border-width: 2px;
     border-radius: 4% 95% 6% 95%/95% 4% 5%;
     transform: rotate(-.5deg);
-}
-
-#sorting>* {
-    /* border: solid 1px blue; */
 }
 
 .modal,
