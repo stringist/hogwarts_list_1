@@ -177,7 +177,7 @@ function filterList(filteredList) {
     }
 
     function houseFilter(student) {
-        console.log(student);
+        //console.log(student);
         if (student.house.toLowerCase() === settings.filterBy) {
             return true;
         } else {
