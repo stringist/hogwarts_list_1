@@ -423,22 +423,17 @@ function tryToMakePrefect(selectedStudent) {
 
     let studentOfSameGender;
     const isOtherPrefectOfSameGender = prefectsOfSameHouse.some(
-            function(student) {
-                if (student.gender === selectedStudent.gender) {
-                    studentOfSameGender = student;
-                    return true;
-                }
+        function(student) {
+            if (student.gender === selectedStudent.gender) {
+                studentOfSameGender = student;
+                return true;
             }
-        )
-        //filter function
-        //if student house and student
-        // if there is another of the same house
+        }
+    )
+
     if (isOtherPrefectOfSameGender) {
         console.log("There can only be two prefects of the same gender in each house!");
         removeOtherSameGender(studentOfSameGender);
-    } else if (prefectsOfSameHouse === 2) {
-        console.log("There can only be two prefects in each house!");
-        removeAOrB(prefects[0], prefects[1]);
     } else {
         makePrefect(selectedStudent);
     }
@@ -481,52 +476,8 @@ function tryToMakePrefect(selectedStudent) {
         }
     }
 
-    function removeAOrB(winnerA, winnerB) {
-        document.querySelector("#onlytwowinners").classList.remove("dialog");
-        document.querySelector("#onlytwowinners").classList.add("dialog.show");
-        document
-            .querySelector("#onlytwowinners .closebutton")
-            .addEventListener("click", closeDialog);
-        document.querySelector("#removeA").addEventListener("click", clickRemoveA);
-        document.querySelector("#removeB").addEventListener("click", clickRemoveB);
-        document.querySelector(
-            "#removeA [data-field=winnerA]"
-        ).textContent = `${winnerA.name} the ${winnerA.type}`;
-        document.querySelector(
-            "#removeB [data-field=winnerB]"
-        ).textContent = `${winnerB.name} the ${winnerB.type}`;
-
-        function closeDialog() {
-            document.querySelector("#onlytwowinners").classList.add("dialog");
-            document.querySelector("#onlytwowinners").classList.remove("dialog.show");
-            document
-                .querySelector("#onlytwowinners .closebutton")
-                .removeEventListener("click", closeDialog);
-            document
-                .querySelector("#removeA")
-                .removeEventListener("click", clickRemoveA);
-            document
-                .querySelector("#removeB")
-                .removeEventListener("click", clickRemoveB);
-        }
-
-        function clickRemoveA() {
-            removePrevWinner(winnerA);
-            makeWinner(selectedStudent);
-            buildList();
-            closeDialog();
-        }
-
-        function clickRemoveB() {
-            removePrevWinner(winnerB);
-            makeWinner(selectedStudent);
-            buildList();
-            closeDialog();
-        }
-    }
-
-    function removePrevWinner(winnerAnimal) {
-        winnerAnimal.winner = false;
+    function removePrevPrefect(prevPrefect) {
+        prevPrefect.prefect = false;
     }
 
     function makePrefect() {
