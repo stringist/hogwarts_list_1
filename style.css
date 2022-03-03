@@ -152,9 +152,9 @@ tr {
     filter: grayscale(80%) brightness(20%);
 }
 
-[data-field="distinctions"] {
-    display: flex;
-    justify-content: space-evenly;
+[data-field="prefect"],
+[data-field="squad"] {
+    margin: auto;
 }
 
 .prefect_container {
@@ -165,6 +165,7 @@ tr {
     width: 35px;
     height: 35px;
     cursor: pointer;
+    margin: auto;
 }
 
 .prefect_selected {
@@ -179,6 +180,7 @@ tr {
     width: 35px;
     height: 35px;
     cursor: pointer;
+    margin: auto;
 }
 
 .squad_selected {
