@@ -57,7 +57,7 @@ h1 {
 }
 
 h2 {
-    font-family: var(--headline);
+    font-family: var(--cursive);
     font-size: 3rem;
 }
 
@@ -222,15 +222,21 @@ tr {
 
 .dialog h1 {
     font-family: var(--cursive);
-    font-size: 5rem;
+    font-size: 3rem;
 }
 
+.dialog,
 div.modal {
     position: absolute;
-    top: 10vw;
-    left: 10%;
-    width: 80vw;
-    height: 60vw;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vw;
     background-image: url("./assets/parchment2.png");
     background-size: contain;
+}
+
+.buttons-wrapper {
+    display: flex;
+    justify-content: space-evenly;
 }

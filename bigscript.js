@@ -326,8 +326,8 @@ function displayStudent(student) {
             student.prefect = false;
         } else {
             // TO DO: add conditions/make prefect function
-            student.prefect = true;
-            // tryToMakePrefect(student);
+            // student.prefect = true;
+            tryToMakePrefect(student);
         }
         buildList();
     }
@@ -354,7 +354,7 @@ function displayStudent(student) {
         // add event listeners
 
         document.querySelector(".modal").classList.remove("hidden");
-        // document.querySelector("#makePrefect").addEventListener("click", tryToMakePrefect);
+        document.querySelector("#makePrefect").addEventListener("click", tryToMakePrefect);
         // document.querySelector("#inquisitorial").addEventListener("click", tryToAddToSquad);
         // document.querySelector("#expel").addEventListener("click", tryToExpel);
         document
@@ -413,47 +413,58 @@ function displayStudent(student) {
     document.querySelector("#list tbody").appendChild(clone);
 }
 
-function tryToMakePrefect(selectedstudent) {
+function tryToMakePrefect(selectedStudent) {
     const prefects = allStudents.filter((student) => student.prefect);
 
     const numberOfPrefects = prefects.length;
-    const other = prefects
-        .filter((student) => student.type === selectedStudent.type)
-        .shift();
-    // if there is another of the same type
-    if (other !== undefined) {
-        console.log("There can only be two prefect of each type!");
-        removeOther(other);
-    } else if (numberOfWinners >= 2) {
-        console.log("There can only be two winners!");
-        removeAOrB(winners[0], winners[1]);
+
+    const prefectsOfSameHouse = prefects
+        .filter((student) => student.house === selectedStudent.house);
+
+    let studentOfSameGender;
+    const isOtherPrefectOfSameGender = prefectsOfSameHouse.some(
+            function(student) {
+                if (student.gender === selectedStudent.gender) {
+                    studentOfSameGender = student;
+                    return true;
+                }
+            }
+        )
+        //filter function
+        //if student house and student
+        // if there is another of the same house
+    if (isOtherPrefectOfSameGender) {
+        console.log("There can only be two prefects of the same gender in each house!");
+        removeOtherSameGender(studentOfSameGender);
+    } else if (prefectsOfSameHouse === 2) {
+        console.log("There can only be two prefects in each house!");
+        removeAOrB(prefects[0], prefects[1]);
     } else {
-        makeWinner(selectedStudent);
+        makePrefect(selectedStudent);
     }
-    console.log(`There are ${numberOfWinners} winners`);
+    console.log(`There are ${numberOfPrefects} prefects`);
 
-    console.log(other);
+    console.log(studentOfSameGender);
 
-    function removeOther(other) {
+    function removeOtherSameGender(studentOfSameGender) {
         // ask user to ignore or remove 'other'
-        document.querySelector("#onlyonekind").classList.remove("dialog");
-        document.querySelector("#onlyonekind").classList.add("dialog.show");
+        document.querySelector("#sexistdialog").classList.remove("hidden");
         document
-            .querySelector("#onlyonekind .closebutton")
+            .querySelector("#sexistdialog .closebutton")
             .addEventListener("click", closeDialog);
         document
             .querySelector("#removeother")
             .addEventListener("click", clickRemoveOther);
         document.querySelector(
-            "#removeother .student1"
-        ).textContent = `${other.name}?`;
+            "#removeother .prefect1"
+        ).textContent = `${studentOfSameGender.firstName} ${studentOfSameGender.lastName}`;
 
         // if ignore, do nothing
 
         function closeDialog() {
-            document.querySelector("#onlyonekind").classList.add("dialog");
+            document.querySelector("#sexistdialog").classList.add("hidden");
             document
-                .querySelector("#onlyonekind .closebutton")
+                .querySelector(".closebutton")
                 .removeEventListener("click", closeDialog);
             document
                 .querySelector("#removeother")
@@ -463,8 +474,8 @@ function tryToMakePrefect(selectedstudent) {
 
         function clickRemoveOther() {
             console.log("removeOther is clicked");
-            removePrevWinner(other);
-            makeWinner(selectedStudent);
+            removePrevPrefect(studentOfSameGender);
+            makePrefect(selectedStudent);
             buildList();
             closeDialog();
         }
@@ -518,7 +529,7 @@ function tryToMakePrefect(selectedstudent) {
         winnerAnimal.winner = false;
     }
 
-    function makeWinner(animal) {
-        animal.winner = true;
+    function makePrefect() {
+        selectedStudent.prefect = true;
     }
 }
