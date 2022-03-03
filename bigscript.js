@@ -90,7 +90,7 @@ function getNameParts(jsonObject) {
             const lastName = cleanNameArr[2];
             return { firstName, middleName, lastName };
         }
-    } else {
+    } else if (cleanNameArr.length < 2) {
         return { firstName };
     }
 }
@@ -284,11 +284,21 @@ function displayStudent(student) {
 
     // set clone data
     if (settings.firstNamelastName === true) {
-        clone.querySelector("[data-field=name]").textContent =
-            student.firstName + " " + student.lastName;
+        if (!student.lastName) {
+            clone.querySelector("[data-field=name]").textContent =
+                student.firstName;
+        } else {
+            clone.querySelector("[data-field=name]").textContent =
+                student.firstName + " " + student.lastName;
+        }
     } else {
-        clone.querySelector("[data-field=name]").textContent =
-            student.lastName + ", " + student.firstName;
+        if (!student.lastName) {
+            clone.querySelector("[data-field=name]").textContent =
+                student.firstName;
+        } else {
+            clone.querySelector("[data-field=name]").textContent =
+                student.lastName + ", " + student.firstName;
+        }
     }
 
     clone.querySelector("[data-field=house]").textContent = student.house;

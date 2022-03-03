@@ -11,9 +11,10 @@
 </head>
 
 <body>
-    <h1>List of Students</h1>
+    <div class="top-wrapper">
+        <h1>List of Students</h1>
 
-    <!-- <p>
+        <!-- <p>
         Filter:
         <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
         <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
@@ -21,38 +22,43 @@
         <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
     </p> -->
 
-    <!-- <hr /> -->
+        <!-- <hr /> -->
 
-    <table id="list">
-        <thead>
-            <tr id="sorting">
-                <th data-action="sort" data-sort-direction="asc" data-sort="name">
-                    Name
-                    <div id="nametoggle">First ⇋ Last </div>
-                </th>
+        <table id="list">
+            <thead>
+                <tr id="sorting">
+                    <th data-action="sort" data-sort-direction="asc" data-sort="name">
+                        Name
 
-                <th data-action="sort" data-sort-direction="asc" data-sort="house">
-                    House
-                    <div class="menu"> <select name="houses" id="housesDrop"></div>
+                    </th>
+
+                    <th data-action="sort" data-sort-direction="asc" data-sort="house">
+                        House
+
+                    </th>
+                    <th data-action="sort" data-sort-direction="asc" data-sort="blood">
+                        Blood status
+                    </th>
+                    <th data-action="sort" data-sort-direction="asc" data-sort="prefect">
+                        Distinctions
+                    </th>
+                </tr>
+                <tr id="filtering">
+                    <th id="nametoggle">First ⇋ Last </th>
+                    <th class="menu"> <select name="houses" id="housesDrop">
               <option data-action="filter" data-filter="all"value="all">All houses</option>
               <option data-action="filter" data-filter="gryffindor" value="gryffindor">Gryffindor</option>
               <option data-action="filter" data-filter="hufflepuff" value="hufflepuff">Hufflepuff</option>
               <option data-action="filter" data-filter="ravenclaw" value="ravenclaw">Ravenclaw</option>
               <option data-action="filter" data-filter="slytherin" value="slytherin">Slytherin</option>
-            </select>
-                </th>
-                <th data-action="sort" data-sort-direction="asc" data-sort="blood">
-                    Blood status
-                </th>
-                <th data-action="sort" data-sort-direction="asc" data-sort="prefect">
-                    Distinctions
-                </th>
+            </select></th>
+                </tr>
+            </thead>
 
-            </tr>
-        </thead>
-        <tbody>
-            <!-- student template will be copied and inserted here -->
-        </tbody>
+    </div>
+    <tbody>
+        <!-- student template will be copied and inserted here -->
+    </tbody>
     </table>
     <template id="studentTable">
       <tr>
