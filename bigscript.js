@@ -354,7 +354,9 @@ function displayStudent(student) {
             .classList.remove("prefect_selected");
     }
 
-    clone.querySelector("[data-field=blood").textContent = getBloodStatus(student);
+    if (getBloodStatus(student) === "half") {
+        clone.querySelector(".blood_container").classList.add("half_blood");
+    } else if (getBloodStatus(student) === "full") { clone.querySelector(".blood_container").classList.add("full_blood"); } else { clone.querySelector(".blood_container").classList.add("muggle_blood"); }
 
     if (student.squad === true) {
         clone.querySelector(".squad_container").classList.add("squad_selected");
@@ -409,37 +411,71 @@ function displayStudent(student) {
             .querySelector("button.closebutton")
             .addEventListener("click", closeDetails);
         // fill in details:
-        document.querySelector("#detailFirstName").textContent =
+        // NAME
+        document.querySelector("#detailFirstName span").textContent =
             " " + student.firstName;
         if (student.middleName !== undefined) {
-            document.querySelector("#detailMiddleName").textContent =
+            document.querySelector("#detailMiddleName span").textContent =
                 " " + student.MiddleName;
         } else {
-            document.querySelector("#detailMiddleName").textContent = " -----";
+            document.querySelector("#detailMiddleName span").textContent = " -----";
         }
         if (student.lastName !== undefined) {
-            document.querySelector("#detailSurname").textContent =
+            document.querySelector("#detailSurname span").textContent =
                 " " + student.lastName;
         } else {
-            document.querySelector("#detailSurname").textContent = " -----";
+            document.querySelector("#detailSurname span").textContent = " -----";
         }
         if (student.nickName !== undefined) {
-            document.querySelector("#detailnickName").textContent =
+            document.querySelector("#detailnickName span").textContent =
                 " " + student.nickName;
         } else {
-            document.querySelector("#detailNickname").textContent = " -----";
+            document.querySelector("#detailNickname span").textContent = " -----";
         }
-        document.querySelector("#detailHouse").textContent = " " + student.house;
-        document.querySelector("#detailBlood").textContent = "";
-        if (student.prefect) {
-            document.querySelector("#detailPrefect").textContent = " yes";
+
+        // HOUSE
+        document.querySelector("#detailHouse span").textContent = " " + student.house;
+
+
+        // BLOOD
+        if (getBloodStatus(student) === "half") {
+            document.querySelector("#detailBlood span").textContent = "Half-blood";
+            document.querySelector("#detailBlood .big_blood_container").classList.remove("muggle_blood");
+            document.querySelector("#detailBlood .big_blood_container").classList.remove("full_blood");
+            document.querySelector("#detailBlood .big_blood_container").classList.add("half_blood");
+        } else if (getBloodStatus(student) === "full") {
+            document.querySelector("#detailBlood .big_blood_container").classList.remove("muggle_blood");
+            document.querySelector("#detailBlood .big_blood_container").classList.remove("half_blood");
+            document.querySelector("#detailBlood .big_blood_container").classList.add("full_blood");
+            document.querySelector("#detailBlood span").textContent = "Full-blood";
         } else {
-            document.querySelector("#detailPrefect").textContent = " -----";
+            document.querySelector("#detailBlood .big_blood_container").classList.remove("half_blood");
+            document.querySelector("#detailBlood .big_blood_container").classList.remove("full_blood");
+            document.querySelector("#detailBlood .big_blood_container").classList.add("muggle_blood");
+            document.querySelector("#detailBlood span").textContent = "Muggle-blood";
+        }
+
+
+
+
+
+
+
+
+        if (student.squad === true) {
+            clone.querySelector(".squad_container").classList.add("squad_selected");
+        } else {
+            clone.querySelector(".squad_container").classList.remove("squad_selected");
+        }
+        if (student.prefect) {
+            document.querySelector("#detailPrefect span").textContent = " yes";
+        } else {
+            document.querySelector("#detailPrefect span").textContent = "----- ";
         }
         if (student.squad) {
-            document.querySelector("#detailSquad").textContent = " yes";
+            document.querySelector("#detailSquad span").textContent = " yes";
         } else {
-            document.querySelector("#detailPrefect").textContent = " -----";
+            document.querySelector("#detailPrefect span").textContent = " -----";
         }
 
         function closeDetails() {

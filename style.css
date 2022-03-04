@@ -80,9 +80,16 @@ ul {
     margin: 2rem auto 4rem auto;
 }
 
+li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 ul>li>span {
     font-family: var(--cursive);
     font-size: 4rem;
+    padding-top: 0;
 }
 
 label {
@@ -120,10 +127,6 @@ button {
     cursor: pointer;
 }
 
-table {
-    /* margin: auto 2rem auto 2rem; */
-}
-
 td {
     font-family: var(--cursive);
     font-size: 2.5rem;
@@ -156,6 +159,36 @@ td {
 
 .shadeOut {
     filter: grayscale(80%) brightness(20%);
+}
+
+.blood_container {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 35px;
+    height: 35px;
+    margin: auto;
+}
+
+.big_blood_container {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 45px;
+    height: 45px;
+    /* margin: auto; */
+}
+
+.full_blood {
+    background-image: url("./assets/SVG/full_blood.svg");
+}
+
+.half_blood {
+    background-image: url("./assets/SVG/half_blood.svg");
+}
+
+.muggle_blood {
+    background-image: url("./assets/SVG/muggle_blood.svg");
 }
 
 .prefect_container {

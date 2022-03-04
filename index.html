@@ -67,7 +67,7 @@
       <tr>
         <td data-field="name">full name</td>
     <td data-field="house">House</td>
-        <td data-field="blood">Blood Status</td>
+        <td data-field="blood"><div class="blood_container"></div></td>
             <td data-field="prefect"><div class="prefect_container"></div></td>
 <td data-field="squad"><div class="squad_container"></div></td>
      
@@ -80,14 +80,17 @@
             <div class="hidden redstamp">Expelled</div>
             <img src="" alt="" />
             <ul>
-                <li>First Name:<span id="detailFirstName"></span></li>
-                <li>Middle Name:<span id="detailMiddleName"></span></li>
-                <li>Surname:<span id="detailSurname"></span></li>
-                <li>Nickname:<span id="detailNickname"></span></li>
-                <li>House:<span id="detailHouse"></span></li>
-                <li>Blood status:<span id="detailBlood"></span></li>
-                <li>Prefect:<span id="detailPrefect"></span></li>
-                <li>Inquisitorial Squad<span id="detailSquad"></span></li>
+                <li id="detailFirstName">First Name:<span></span></li>
+                <li id="detailMiddleName">Middle Name:<span></span></li>
+                <li id="detailSurname">Surname:<span></span></li>
+                <li id="detailNickname">Nickname:<span></span></li>
+                <li id="detailHouse">House:<span></span></li>
+                <li id="detailBlood">Blood status:
+                    <span></span>
+                    <div class="big_blood_container"></div>
+                </li>
+                <li id="detailPrefect">Prefect:<span></span></li>
+                <li id="detailSquad">Inquisitorial Squad<span></span></li>
             </ul>
             <button id="makePrefect" class="odd">Appoint as Prefect</button>
             <button id="inquisitorial">Add to Inquisitorial Squad</button>
