@@ -386,19 +386,14 @@ function displayStudent(student) {
         document.querySelector(".modal").classList.remove("hidden");
 
         // add event listeners
-
         document.querySelector("#makePrefect").addEventListener("click", togglePrefect);
         document.querySelector("#makePrefect").addEventListener("click", detailsPopUp);
-        // function updatePrefectdetail() {
-        //     console.log(`prefectDetail update`)
-        //     togglePrefect(student);
-        //     detailsPopUp();
-        // }
+
 
         document.querySelector("#inquisitorial").addEventListener("click", toggleSquad);
         document.querySelector("#inquisitorial").addEventListener("click", detailsPopUp);
 
-        // document.querySelector("#expel").addEventListener("click", tryToExpel);
+        document.querySelector("#expel").addEventListener("click", tryToExpel)
         document.querySelector("button.closebutton").addEventListener("click", closeDetails);
         // fill in details:
         // NAME
@@ -476,7 +471,9 @@ function displayStudent(student) {
             document.querySelector("#inquisitorial").removeEventListener("click", toggleSquad);
             // document.querySelector("#expel").removeEventListener("click", tryToExpel);
             document.querySelector("button.closebutton").removeEventListener("click", closeDetails);
+            buildList();
         }
+        buildList();
     }
     // // append clone to list
     document.querySelector("#list tbody").appendChild(clone);
@@ -563,4 +560,5 @@ function displayStudent(student) {
 
     }
 
+    function tryToExpel() {}
 }
