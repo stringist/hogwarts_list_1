@@ -389,11 +389,10 @@ function displayStudent(student) {
         document.querySelector("#makePrefect").addEventListener("click", togglePrefect);
         document.querySelector("#makePrefect").addEventListener("click", detailsPopUp);
 
-
         document.querySelector("#inquisitorial").addEventListener("click", toggleSquad);
         document.querySelector("#inquisitorial").addEventListener("click", detailsPopUp);
 
-        document.querySelector("#expel").addEventListener("click", tryToExpel)
+        document.querySelector("#expel").addEventListener("click", tryToExpel);
         document.querySelector("button.closebutton").addEventListener("click", closeDetails);
         // fill in details:
         // NAME
@@ -469,7 +468,7 @@ function displayStudent(student) {
 
             document.querySelector("#makePrefect").removeEventListener("click", togglePrefect);
             document.querySelector("#inquisitorial").removeEventListener("click", toggleSquad);
-            // document.querySelector("#expel").removeEventListener("click", tryToExpel);
+            document.querySelector("#expel").removeEventListener("click", tryToExpel);
             document.querySelector("button.closebutton").removeEventListener("click", closeDetails);
             buildList();
         }
@@ -557,8 +556,22 @@ function displayStudent(student) {
         function addToSquad(selectedStudent) {
             selectedStudent.squad = true;
         }
-
     }
 
-    function tryToExpel() {}
+    function tryToExpel() {
+        if (!student.hacker) {
+            student.expelled = true;
+            const studentIndex = allStudents.indexOf(student);
+            console.log(studentIndex);
+            expelledStudents = allStudents.splice(studentIndex, 1);
+            console.log(expelledStudents);
+            closeExpelDialog()
+        }
+
+        function closeExpelDialog() {
+            document.querySelector("#expel").removeEventListener("click", tryToExpel);
+            document.querySelector("div .modal").classList.add("hidden");
+        }
+
+    }
 }
