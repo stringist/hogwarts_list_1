@@ -445,11 +445,13 @@ function displayStudent(student) {
             document.querySelector("#detailPrefect span").textContent = "Yes";
             document.querySelector("#detailPrefect .big_prefect_container").classList.remove("prefect_unselected");
             document.querySelector("#detailPrefect .big_prefect_container").classList.add("prefect_selected");
+            document.querySelector("#makePrefect").textContent = "Remove Prefect";
         }
         if (student.prefect === false) {
             document.querySelector("#detailPrefect span").textContent = "No";
             document.querySelector("#detailPrefect .big_prefect_container").classList.remove("prefect_selected");
             document.querySelector("#detailPrefect .big_prefect_container").classList.add("prefect_unselected");
+            document.querySelector("#makePrefect").textContent = "Appoint as Prefect";
         }
 
         // SQUAD
