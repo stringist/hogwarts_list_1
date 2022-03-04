@@ -146,6 +146,10 @@ td {
     cursor: pointer;
 }
 
+#housesDrop {
+    cursor: pointer;
+}
+
 .hidden {
     display: none;
 }

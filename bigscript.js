@@ -3,7 +3,12 @@
 window.addEventListener("DOMContentLoaded", start);
 
 let allStudents = [];
-let expelledStudents = []; // let filteredArray = [];
+let expelledStudents = [];
+let familiesObj = {
+    half: [],
+    pure: [],
+};
+// let filteredArray = [];
 // The prototype for all animals:
 
 const settings = {
@@ -54,7 +59,48 @@ async function loadJSON() {
     const response = await fetch("students.json");
     const jsonData = await response.json();
 
+    const famResponse = await fetch("families.json");
+    const famData = await famResponse.json();
+
+    await makeFamObj(famData);
     cleanData(jsonData);
+
+    // Promise.all([jsonData, famData]).then(cleanData(jsonData, famData));
+}
+
+async function makeFamObj(famData) {
+    // console.log(famData);
+    // familiesObj.half = famData.half.map(name => { return name })
+    famData.half.forEach((name) => {
+        familiesObj.half.push(name);
+    });
+    famData.pure.forEach((name) => {
+        familiesObj.pure.push(name);
+    });
+    console.log(familiesObj.half)
+}
+
+function getBloodStatus(student) {
+    const halfBloodArr = familiesObj.half;
+    console.log(familiesObj.half);
+    const pureBloodArr = familiesObj.pure;
+    const lastName = student.lastName;
+    const testArr = [1, 2, 3]
+    console.log(testArr);
+
+
+    if (isNameListed(halfBloodArr, lastName)) {
+        console.log(`${student.firstName} is half`);
+        return "half";
+    } else if (isNameListed(pureBloodArr, lastName)) {
+        console.log(`${student.firstName} is full blood`);
+        return "full";
+    } else {
+        console.log(`${student.firstName} is muggle blood`)
+        return "muggle"
+    }
+
+    function isNameListed(arr, name) { return arr.includes(name) }
 }
 
 // cleaning the data
@@ -125,6 +171,9 @@ function capitalize(string) {
     }
 }
 
+
+
+
 function prepareObjects(jsonData) {
     allStudents = jsonData.map(prepareObject);
     buildList();
@@ -139,7 +188,7 @@ function prepareObject(jsonObject) {
     student.nickName = jsonObject.fullname.nickName;
     student.house = jsonObject.house;
     student.gender = jsonObject.gender;
-    // blood: "",
+    student.blood = getBloodStatus(student);
     return student;
 }
 
@@ -282,16 +331,14 @@ function displayStudent(student) {
     // set clone data
     if (settings.firstNamelastName === true) {
         if (!student.lastName) {
-            clone.querySelector("[data-field=name]").textContent =
-                student.firstName;
+            clone.querySelector("[data-field=name]").textContent = student.firstName;
         } else {
             clone.querySelector("[data-field=name]").textContent =
                 student.firstName + " " + student.lastName;
         }
     } else {
         if (!student.lastName) {
-            clone.querySelector("[data-field=name]").textContent =
-                student.firstName;
+            clone.querySelector("[data-field=name]").textContent = student.firstName;
         } else {
             clone.querySelector("[data-field=name]").textContent =
                 student.lastName + ", " + student.firstName;
@@ -306,6 +353,8 @@ function displayStudent(student) {
             .querySelector(".prefect_container")
             .classList.remove("prefect_selected");
     }
+
+    clone.querySelector("[data-field=blood").textContent = getBloodStatus(student);
 
     if (student.squad === true) {
         clone.querySelector(".squad_container").classList.add("squad_selected");
@@ -351,7 +400,9 @@ function displayStudent(student) {
         // add event listeners
 
         document.querySelector(".modal").classList.remove("hidden");
-        document.querySelector("#makePrefect").addEventListener("click", togglePrefect);
+        document
+            .querySelector("#makePrefect")
+            .addEventListener("click", togglePrefect);
         // document.querySelector("#inquisitorial").addEventListener("click", tryToAddToSquad);
         // document.querySelector("#expel").addEventListener("click", tryToExpel);
         document
@@ -391,8 +442,6 @@ function displayStudent(student) {
             document.querySelector("#detailPrefect").textContent = " -----";
         }
 
-
-
         function closeDetails() {
             document.querySelector(".modal").classList.add("hidden");
 
@@ -409,27 +458,29 @@ function displayStudent(student) {
     // // append clone to list
     document.querySelector("#list tbody").appendChild(clone);
 
-
     function tryToMakePrefect(selectedStudent) {
-        console.log(`selected student is ${selectedStudent}`)
+        console.log(`selected student is ${selectedStudent}`);
         const prefects = allStudents.filter((student) => student.prefect);
         // console.log(student.prefect)
 
-        const prefectsOfSameHouse = prefects
-            .filter((student) => student.house === selectedStudent.house);
+        const prefectsOfSameHouse = prefects.filter(
+            (student) => student.house === selectedStudent.house
+        );
 
         let studentOfSameGender;
-        const isOtherPrefectOfSameGender = prefectsOfSameHouse.some(
-            function(student) {
-                if (student.gender === selectedStudent.gender) {
-                    studentOfSameGender = student;
-                    return true;
-                }
+        const isOtherPrefectOfSameGender = prefectsOfSameHouse.some(function(
+            student
+        ) {
+            if (student.gender === selectedStudent.gender) {
+                studentOfSameGender = student;
+                return true;
             }
-        )
+        });
 
         if (isOtherPrefectOfSameGender) {
-            console.log("There can only be two prefects of the same gender in each house!");
+            console.log(
+                "There can only be two prefects of the same gender in each house!"
+            );
             removeOtherSameGender(studentOfSameGender);
         } else {
             makePrefect(selectedStudent);
