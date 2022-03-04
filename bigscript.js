@@ -64,13 +64,9 @@ async function loadJSON() {
 
     await makeFamObj(famData);
     cleanData(jsonData);
-
-    // Promise.all([jsonData, famData]).then(cleanData(jsonData, famData));
 }
 
 async function makeFamObj(famData) {
-    // console.log(famData);
-    // familiesObj.half = famData.half.map(name => { return name })
     famData.half.forEach((name) => {
         familiesObj.half.push(name);
     });
@@ -412,6 +408,9 @@ function displayStudent(student) {
         } else {
             document.querySelector("#detailNickname span").textContent = " -----";
         }
+
+        // GENDER
+        document.querySelector("#detailGender span").textContent = " " + student.gender;
 
         // HOUSE
         document.querySelector("#detailHouse span").textContent = " " + student.house;

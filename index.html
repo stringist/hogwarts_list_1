@@ -49,7 +49,7 @@
                 <tr id="filtering">
                     <th id="nametoggle">First ⇋ Last </th>
                     <th class="menu"> <select name="houses" id="housesDrop">
-              <option data-action="filter" data-filter="all"value="all">All houses</option>
+              <option data-action="filter" data-filter="all"value="all" selected>All houses</option>
               <option data-action="filter" data-filter="gryffindor" value="gryffindor">Gryffindor</option>
               <option data-action="filter" data-filter="hufflepuff" value="hufflepuff">Hufflepuff</option>
               <option data-action="filter" data-filter="ravenclaw" value="ravenclaw">Ravenclaw</option>
@@ -66,13 +66,11 @@
     <template id="studentTable">
       <tr>
         <td data-field="name">full name</td>
-    <td data-field="house">House</td>
+        <td data-field="house">House</td>
         <td data-field="blood"><div class="blood_container"></div></td>
-            <td data-field="prefect"><div class="prefect_container"></div></td>
-<td data-field="squad"><div class="squad_container"></div></td>
-     
-
-      </tr>
+        <td data-field="prefect"><div class="prefect_container"></div></td>
+        <td data-field="squad"><div class="squad_container"></div></td>
+     </tr>
     </template>
     <!-- modal popup -->
     <div class="modal hidden">
@@ -84,6 +82,7 @@
                 <li id="detailMiddleName">Middle Name:<span></span></li>
                 <li id="detailSurname">Surname:<span></span></li>
                 <li id="detailNickname">Nickname:<span></span></li>
+                <li id="detailGender">Gender:<span></span> </li>
                 <li id="detailHouse">House:<span></span></li>
                 <li id="detailBlood">Blood status:
                     <span></span>
