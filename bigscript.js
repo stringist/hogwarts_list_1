@@ -87,7 +87,6 @@ function getBloodStatus(student) {
     if (isNameListed(halfBloodArr, lastName)) {
         return "half";
     } else if (isNameListed(pureBloodArr, lastName)) {
-        console.log(`${student.firstName} ${student.lastName} is full`);
         return "full";
     } else {
         return "muggle";
@@ -312,6 +311,7 @@ function displayStudent(student) {
     const clone = document.querySelector("template#studentTable").content.cloneNode(true);
 
     // set clone data
+    //  tr NAME
     if (settings.firstNamelastName === true) {
         if (!student.lastName) {
             clone.querySelector("[data-field=name]").textContent = student.firstName;
@@ -325,14 +325,10 @@ function displayStudent(student) {
             clone.querySelector("[data-field=name]").textContent = student.lastName + ", " + student.firstName;
         }
     }
-
+    //  tr HOUSE
     clone.querySelector("[data-field=house]").textContent = student.house;
-    if (student.prefect === true) {
-        clone.querySelector(".prefect_container").classList.add("prefect_selected");
-    } else {
-        clone.querySelector(".prefect_container").classList.remove("prefect_selected");
-    }
 
+    // tr BLOOD
     if (getBloodStatus(student) === "half") {
         clone.querySelector(".blood_container").classList.add("half_blood");
     } else if (getBloodStatus(student) === "full") {
@@ -341,11 +337,21 @@ function displayStudent(student) {
         clone.querySelector(".blood_container").classList.add("muggle_blood");
     }
 
+    // tr PREFECT
+    if (student.prefect === true) {
+        clone.querySelector(".prefect_container").classList.add("prefect_selected");
+    } else {
+        clone.querySelector(".prefect_container").classList.remove("prefect_selected");
+    }
+
+    // tr SQUAD
     if (student.squad === true) {
-        console.log(`studenst squad check class list`)
+        console.log(`studenst squad check class list`);
+        clone.querySelector(".squad_container").classList.remove("squad_unselected");
         clone.querySelector(".squad_container").classList.add("squad_selected");
     } else {
         clone.querySelector(".squad_container").classList.remove("squad_selected");
+        clone.querySelector(".squad_container").classList.add("squad_unselected");
     }
 
     // PREFECT & TOGGLE Prefect
@@ -354,8 +360,8 @@ function displayStudent(student) {
     function togglePrefect() {
         if (student.prefect) {
             student.prefect = false;
+            buildList();
         } else {
-            console.log(`toggling ${student} to be prefect`);
             tryToMakePrefect(student);
         }
         buildList();
@@ -367,9 +373,8 @@ function displayStudent(student) {
     function toggleSquad() {
         if (student.squad) {
             student.squad = false;
+            buildList();
         } else {
-            // TO DO: add conditions/make prefect function
-            console.log(`Trying to cal addToSquad for ${student.firstName}`);
             tryToAddToSquad(student);
         }
         buildList();
@@ -377,16 +382,22 @@ function displayStudent(student) {
 
     clone.querySelector(`[data-field=name]`).addEventListener("click", detailsPopUp);
 
-
-
     function detailsPopUp() {
+        document.querySelector(".modal").classList.remove("hidden");
+
         // add event listeners
 
-        document.querySelector(".modal").classList.remove("hidden");
         document.querySelector("#makePrefect").addEventListener("click", togglePrefect);
         document.querySelector("#makePrefect").addEventListener("click", detailsPopUp);
+        // function updatePrefectdetail() {
+        //     console.log(`prefectDetail update`)
+        //     togglePrefect(student);
+        //     detailsPopUp();
+        // }
 
-        document.querySelector("#inquisitorial").addEventListener("click", tryToAddToSquad);
+        document.querySelector("#inquisitorial").addEventListener("click", toggleSquad);
+        document.querySelector("#inquisitorial").addEventListener("click", detailsPopUp);
+
         // document.querySelector("#expel").addEventListener("click", tryToExpel);
         document.querySelector("button.closebutton").addEventListener("click", closeDetails);
         // fill in details:
@@ -434,23 +445,33 @@ function displayStudent(student) {
             document.querySelector("#detailPrefect span").textContent = "Yes";
             document.querySelector("#detailPrefect .big_prefect_container").classList.remove("prefect_unselected");
             document.querySelector("#detailPrefect .big_prefect_container").classList.add("prefect_selected");
-        } else {
-            document.querySelector("#detailPrefect span").textContent = "No ";
+        }
+        if (student.prefect === false) {
+            document.querySelector("#detailPrefect span").textContent = "No";
             document.querySelector("#detailPrefect .big_prefect_container").classList.remove("prefect_selected");
             document.querySelector("#detailPrefect .big_prefect_container").classList.add("prefect_unselected");
         }
 
+        // SQUAD
+
         if (student.squad) {
-            document.querySelector("#detailSquad span").textContent = " yes";
-        } else {
-            document.querySelector("#detailPrefect span").textContent = " -----";
+            document.querySelector("#detailSquad span").textContent = "Yes";
+            document.querySelector("#detailSquad .big_squad_container").classList.remove("squad_unselected");
+            document.querySelector("#detailSquad .big_squad_container").classList.add("squad_selected");
+            document.querySelector("#inquisitorial").textContent = "Remove from Inquisitorial Squad";
+        }
+        if (student.squad === false) {
+            document.querySelector("#detailSquad span").textContent = "No";
+            document.querySelector("#detailSquad .big_squad_container").classList.remove("squad_selected");
+            document.querySelector("#detailSquad .big_squad_container").classList.add("squad_unselected");
+            document.querySelector("#inquisitorial").textContent = "Add to Inquisitorial Squad";
         }
 
         function closeDetails() {
             document.querySelector(".modal").classList.add("hidden");
 
-            document.querySelector("#makePrefect").removeEventListener("click", tryToMakePrefect);
-            document.querySelector("#inquisitorial").removeEventListener("click", tryToAddToSquad);
+            document.querySelector("#makePrefect").removeEventListener("click", togglePrefect);
+            document.querySelector("#inquisitorial").removeEventListener("click", toggleSquad);
             // document.querySelector("#expel").removeEventListener("click", tryToExpel);
             document.querySelector("button.closebutton").removeEventListener("click", closeDetails);
         }
@@ -502,7 +523,7 @@ function displayStudent(student) {
                 buildList();
                 closeDialog();
             }
-            buildList()
+            // buildList();
         }
 
         function removePrevPrefect(prevPrefect) {
@@ -515,9 +536,9 @@ function displayStudent(student) {
     }
 
     function tryToAddToSquad(selectedStudent) {
-        const bloodResult = getBloodStatus(selectedStudent.lastName)
+        const bloodResult = getBloodStatus(selectedStudent);
         console.log(bloodResult, selectedStudent.lastName);
-        if (getBloodStatus(selectedStudent) === "full" || selectedStudent.house === "Slytherin") {
+        if (bloodResult === "full" || selectedStudent.house === "Slytherin") {
             addToSquad(selectedStudent);
             // addedToSquadDialogue(selectedStudent);
         } else {
@@ -535,18 +556,9 @@ function displayStudent(student) {
         }
 
         function addToSquad(selectedStudent) {
-            selectedStudent.squad = true
+            selectedStudent.squad = true;
         }
 
-        // function addedToSquadDialogue(selectedStudent) {
-        //     document.querySelector("#joinedsquad").classList.remove("hidden");
-        //     document.querySelector("#joinedsquad .dialogcontent .closebutton").addEventListener("click", closeDialog);
-        // }
-
-        // function closeDialog() {
-        //     document.querySelector("#joinedsquad").classList.add("hidden");
-        //     document.querySelector("#racistdialog .dialogcontent .closebutton").removeEventListener("click", closeDialog);
-        // }
-        buildList();
     }
+
 }

@@ -219,7 +219,6 @@ td {
 }
 
 .squad_container {
-    background-image: url("./assets/SVG/squad_unselected_2.svg");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -239,6 +238,10 @@ td {
 
 .squad_selected {
     background-image: url("./assets/SVG/squad_icon.svg");
+}
+
+.squad_unselected {
+    background-image: url("./assets/SVG/squad_unselected_2.svg");
 }
 
 .odd {
