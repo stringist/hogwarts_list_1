@@ -89,8 +89,12 @@
                     <span></span>
                     <div class="big_blood_container"></div>
                 </li>
-                <li id="detailPrefect">Prefect:<span></span></li>
-                <li id="detailSquad">Inquisitorial Squad<span></span></li>
+                <li id="detailPrefect">Prefect:<span></span>
+                    <div class="big_prefect_container"></div>
+                </li>
+                <li id="detailSquad">Inquisitorial Squad<span></span>
+                    <div class="big_squad_container"></div>
+                </li>
             </ul>
             <button id="makePrefect" class="odd">Appoint as Prefect</button>
             <button id="inquisitorial">Add to Inquisitorial Squad</button>
@@ -124,6 +128,15 @@
         </div>
     </div>
 
+    <div id="joinedsquad" class="dialog hidden">
+        <div class="dialogcontent">
+            <h1>
+                <span class="squadMember">Name</span> has joined the Inquisitorial Squad!
+            </h1>
+            <button class="closebutton">Excellent</button>
+        </div>
+    </div>
+
     <div id="leftsquad" class="dialog hidden">
         <div class="dialogcontent">
             <h1>
@@ -132,6 +145,7 @@
             <button class="closebutton">Very well...</button>
         </div>
     </div>
+
     <div id="cantexpel" class="dialog hidden">
         <div class="dialogcontent">
             <h1>You do not have the power to expel <span class="infiltrator">Name</span>!

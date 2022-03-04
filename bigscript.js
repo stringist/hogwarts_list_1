@@ -77,30 +77,25 @@ async function makeFamObj(famData) {
     famData.pure.forEach((name) => {
         familiesObj.pure.push(name);
     });
-    console.log(familiesObj.half)
 }
 
 function getBloodStatus(student) {
     const halfBloodArr = familiesObj.half;
-    console.log(familiesObj.half);
     const pureBloodArr = familiesObj.pure;
     const lastName = student.lastName;
-    const testArr = [1, 2, 3]
-    console.log(testArr);
-
 
     if (isNameListed(halfBloodArr, lastName)) {
-        console.log(`${student.firstName} is half`);
         return "half";
     } else if (isNameListed(pureBloodArr, lastName)) {
-        console.log(`${student.firstName} is full blood`);
+        console.log(`${student.firstName} ${student.lastName} is full`);
         return "full";
     } else {
-        console.log(`${student.firstName} is muggle blood`)
-        return "muggle"
+        return "muggle";
     }
 
-    function isNameListed(arr, name) { return arr.includes(name) }
+    function isNameListed(arr, name) {
+        return arr.includes(name);
+    }
 }
 
 // cleaning the data
@@ -149,11 +144,7 @@ function cleanHouse(jsonObj) {
 
 function capitalize(string) {
     if (string.includes(`"`)) {
-        const capString =
-            `"` +
-            string[1].toUpperCase() +
-            string.substring(2, string.lastIndexOf(`"`)).toLowerCase() +
-            `"`;
+        const capString = `"` + string[1].toUpperCase() + string.substring(2, string.lastIndexOf(`"`)).toLowerCase() + `"`;
         return capString;
     }
     if (string.includes("-")) {
@@ -165,14 +156,10 @@ function capitalize(string) {
             string.substring(hyphPos + 2).toLowerCase();
         return capString;
     } else {
-        const capString =
-            string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
+        const capString = string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
         return capString;
     }
 }
-
-
-
 
 function prepareObjects(jsonData) {
     allStudents = jsonData.map(prepareObject);
@@ -240,9 +227,7 @@ function selectSort(event) {
     console.log(`global sortBy going into selectsort is ${settings.sortBy}`);
     const sortBy = event.target.dataset.sort;
     const sortDir = event.target.dataset.sortDirection;
-    console.log(
-        `select sort function sortby is ${sortBy}, sortDir is ${sortDir}`
-    );
+    console.log(`select sort function sortby is ${sortBy}, sortDir is ${sortDir}`);
     // find old sortBy elelment
     console.log(`oldElememt is [data-sort='${settings.sortBy}']`);
     const oldElement = document.querySelector(`[data-sort='${settings.sortBy}']`);
@@ -324,24 +309,20 @@ function displayList(students) {
 
 function displayStudent(student) {
     // create clone
-    const clone = document
-        .querySelector("template#studentTable")
-        .content.cloneNode(true);
+    const clone = document.querySelector("template#studentTable").content.cloneNode(true);
 
     // set clone data
     if (settings.firstNamelastName === true) {
         if (!student.lastName) {
             clone.querySelector("[data-field=name]").textContent = student.firstName;
         } else {
-            clone.querySelector("[data-field=name]").textContent =
-                student.firstName + " " + student.lastName;
+            clone.querySelector("[data-field=name]").textContent = student.firstName + " " + student.lastName;
         }
     } else {
         if (!student.lastName) {
             clone.querySelector("[data-field=name]").textContent = student.firstName;
         } else {
-            clone.querySelector("[data-field=name]").textContent =
-                student.lastName + ", " + student.firstName;
+            clone.querySelector("[data-field=name]").textContent = student.lastName + ", " + student.firstName;
         }
     }
 
@@ -349,93 +330,86 @@ function displayStudent(student) {
     if (student.prefect === true) {
         clone.querySelector(".prefect_container").classList.add("prefect_selected");
     } else {
-        clone
-            .querySelector(".prefect_container")
-            .classList.remove("prefect_selected");
+        clone.querySelector(".prefect_container").classList.remove("prefect_selected");
     }
 
     if (getBloodStatus(student) === "half") {
         clone.querySelector(".blood_container").classList.add("half_blood");
-    } else if (getBloodStatus(student) === "full") { clone.querySelector(".blood_container").classList.add("full_blood"); } else { clone.querySelector(".blood_container").classList.add("muggle_blood"); }
+    } else if (getBloodStatus(student) === "full") {
+        clone.querySelector(".blood_container").classList.add("full_blood");
+    } else {
+        clone.querySelector(".blood_container").classList.add("muggle_blood");
+    }
 
     if (student.squad === true) {
+        console.log(`studenst squad check class list`)
         clone.querySelector(".squad_container").classList.add("squad_selected");
     } else {
         clone.querySelector(".squad_container").classList.remove("squad_selected");
     }
 
-    // TODO: Add event listener to click on prefect
-    clone
-        .querySelector(".prefect_container")
-        .addEventListener("click", togglePrefect);
+    // PREFECT & TOGGLE Prefect
+    clone.querySelector(".prefect_container").addEventListener("click", togglePrefect);
 
     function togglePrefect() {
         if (student.prefect) {
             student.prefect = false;
         } else {
-            // TO DO: add conditions/make prefect function
-            // student.prefect = true;
+            console.log(`toggling ${student} to be prefect`);
             tryToMakePrefect(student);
         }
         buildList();
     }
 
-    clone
-        .querySelector(".squad_container")
-        .addEventListener("click", toggleSquad);
+    // SQUAD & TOGGLE
+    clone.querySelector(".squad_container").addEventListener("click", toggleSquad);
 
     function toggleSquad() {
         if (student.squad) {
             student.squad = false;
         } else {
             // TO DO: add conditions/make prefect function
-            student.squad = true;
+            console.log(`Trying to cal addToSquad for ${student.firstName}`);
+            tryToAddToSquad(student);
         }
         buildList();
     }
 
-    clone
-        .querySelector(`[data-field=name]`)
-        .addEventListener("click", detailsPopUp);
+    clone.querySelector(`[data-field=name]`).addEventListener("click", detailsPopUp);
+
+
 
     function detailsPopUp() {
         // add event listeners
 
         document.querySelector(".modal").classList.remove("hidden");
-        document
-            .querySelector("#makePrefect")
-            .addEventListener("click", togglePrefect);
-        // document.querySelector("#inquisitorial").addEventListener("click", tryToAddToSquad);
+        document.querySelector("#makePrefect").addEventListener("click", togglePrefect);
+        document.querySelector("#makePrefect").addEventListener("click", detailsPopUp);
+
+        document.querySelector("#inquisitorial").addEventListener("click", tryToAddToSquad);
         // document.querySelector("#expel").addEventListener("click", tryToExpel);
-        document
-            .querySelector("button.closebutton")
-            .addEventListener("click", closeDetails);
+        document.querySelector("button.closebutton").addEventListener("click", closeDetails);
         // fill in details:
         // NAME
-        document.querySelector("#detailFirstName span").textContent =
-            " " + student.firstName;
+        document.querySelector("#detailFirstName span").textContent = " " + student.firstName;
         if (student.middleName !== undefined) {
-            document.querySelector("#detailMiddleName span").textContent =
-                " " + student.MiddleName;
+            document.querySelector("#detailMiddleName span").textContent = " " + student.MiddleName;
         } else {
             document.querySelector("#detailMiddleName span").textContent = " -----";
         }
         if (student.lastName !== undefined) {
-            document.querySelector("#detailSurname span").textContent =
-                " " + student.lastName;
+            document.querySelector("#detailSurname span").textContent = " " + student.lastName;
         } else {
             document.querySelector("#detailSurname span").textContent = " -----";
         }
         if (student.nickName !== undefined) {
-            document.querySelector("#detailnickName span").textContent =
-                " " + student.nickName;
+            document.querySelector("#detailnickName span").textContent = " " + student.nickName;
         } else {
             document.querySelector("#detailNickname span").textContent = " -----";
         }
 
         // HOUSE
         document.querySelector("#detailHouse span").textContent = " " + student.house;
-
 
         // BLOOD
         if (getBloodStatus(student) === "half") {
@@ -455,23 +429,17 @@ function displayStudent(student) {
             document.querySelector("#detailBlood span").textContent = "Muggle-blood";
         }
 
-
-
-
-
-
-
-
-        if (student.squad === true) {
-            clone.querySelector(".squad_container").classList.add("squad_selected");
-        } else {
-            clone.querySelector(".squad_container").classList.remove("squad_selected");
-        }
+        // PREFECT
         if (student.prefect) {
-            document.querySelector("#detailPrefect span").textContent = " yes";
+            document.querySelector("#detailPrefect span").textContent = "Yes";
+            document.querySelector("#detailPrefect .big_prefect_container").classList.remove("prefect_unselected");
+            document.querySelector("#detailPrefect .big_prefect_container").classList.add("prefect_selected");
         } else {
-            document.querySelector("#detailPrefect span").textContent = "----- ";
+            document.querySelector("#detailPrefect span").textContent = "No ";
+            document.querySelector("#detailPrefect .big_prefect_container").classList.remove("prefect_selected");
+            document.querySelector("#detailPrefect .big_prefect_container").classList.add("prefect_unselected");
         }
+
         if (student.squad) {
             document.querySelector("#detailSquad span").textContent = " yes";
         } else {
@@ -481,32 +449,22 @@ function displayStudent(student) {
         function closeDetails() {
             document.querySelector(".modal").classList.add("hidden");
 
-            document
-                .querySelector("#makePrefect")
-                .removeEventListener("click", tryToMakePrefect);
-            // document.querySelector("#inquisitorial").removeEventListener("click", tryToAddToSquad);
+            document.querySelector("#makePrefect").removeEventListener("click", tryToMakePrefect);
+            document.querySelector("#inquisitorial").removeEventListener("click", tryToAddToSquad);
             // document.querySelector("#expel").removeEventListener("click", tryToExpel);
-            document
-                .querySelector("button.closebutton")
-                .removeEventListener("click", closeDetails);
+            document.querySelector("button.closebutton").removeEventListener("click", closeDetails);
         }
     }
     // // append clone to list
     document.querySelector("#list tbody").appendChild(clone);
 
     function tryToMakePrefect(selectedStudent) {
-        console.log(`selected student is ${selectedStudent}`);
         const prefects = allStudents.filter((student) => student.prefect);
-        // console.log(student.prefect)
 
-        const prefectsOfSameHouse = prefects.filter(
-            (student) => student.house === selectedStudent.house
-        );
+        const prefectsOfSameHouse = prefects.filter((student) => student.house === selectedStudent.house);
 
         let studentOfSameGender;
-        const isOtherPrefectOfSameGender = prefectsOfSameHouse.some(function(
-            student
-        ) {
+        const isOtherPrefectOfSameGender = prefectsOfSameHouse.some(function(student) {
             if (student.gender === selectedStudent.gender) {
                 studentOfSameGender = student;
                 return true;
@@ -514,25 +472,16 @@ function displayStudent(student) {
         });
 
         if (isOtherPrefectOfSameGender) {
-            console.log(
-                "There can only be two prefects of the same gender in each house!"
-            );
             removeOtherSameGender(studentOfSameGender);
         } else {
             makePrefect(selectedStudent);
         }
 
-        console.log(studentOfSameGender);
-
         function removeOtherSameGender(studentOfSameGender) {
             // ask user to ignore or remove 'other'
             document.querySelector("#sexistdialog").classList.remove("hidden");
-            document
-                .querySelector("#sexistdialog .closebutton")
-                .addEventListener("click", closeDialog);
-            document
-                .querySelector("#removeother")
-                .addEventListener("click", clickRemoveOther);
+            document.querySelector("#sexistdialog .closebutton").addEventListener("click", closeDialog);
+            document.querySelector("#removeother").addEventListener("click", clickRemoveOther);
             document.querySelector(
                 "#removeother .prefect1"
             ).textContent = `Replace ${studentOfSameGender.firstName} with ${student.firstName}`;
@@ -541,12 +490,8 @@ function displayStudent(student) {
 
             function closeDialog() {
                 document.querySelector("#sexistdialog").classList.add("hidden");
-                document
-                    .querySelector(".closebutton")
-                    .removeEventListener("click", closeDialog);
-                document
-                    .querySelector("#removeother")
-                    .removeEventListener("click", clickRemoveOther);
+                document.querySelector(".closebutton").removeEventListener("click", closeDialog);
+                document.querySelector("#removeother").removeEventListener("click", clickRemoveOther);
             }
             // if remove other:
 
@@ -557,6 +502,7 @@ function displayStudent(student) {
                 buildList();
                 closeDialog();
             }
+            buildList()
         }
 
         function removePrevPrefect(prevPrefect) {
@@ -566,5 +512,41 @@ function displayStudent(student) {
         function makePrefect() {
             selectedStudent.prefect = true;
         }
+    }
+
+    function tryToAddToSquad(selectedStudent) {
+        const bloodResult = getBloodStatus(selectedStudent.lastName)
+        console.log(bloodResult, selectedStudent.lastName);
+        if (getBloodStatus(selectedStudent) === "full" || selectedStudent.house === "Slytherin") {
+            addToSquad(selectedStudent);
+            // addedToSquadDialogue(selectedStudent);
+        } else {
+            document.querySelector("#racistdialog").classList.remove("hidden");
+            racistDialog();
+        }
+
+        function racistDialog() {
+            document.querySelector("#racistdialog .dialogcontent .closebutton").addEventListener("click", closeDialog);
+        }
+
+        function closeDialog() {
+            document.querySelector("#racistdialog").classList.add("hidden");
+            document.querySelector("#racistdialog .dialogcontent .closebutton").removeEventListener("click", closeDialog);
+        }
+
+        function addToSquad(selectedStudent) {
+            selectedStudent.squad = true
+        }
+
+        // function addedToSquadDialogue(selectedStudent) {
+        //     document.querySelector("#joinedsquad").classList.remove("hidden");
+        //     document.querySelector("#joinedsquad .dialogcontent .closebutton").addEventListener("click", closeDialog);
+        // }
+
+        // function closeDialog() {
+        //     document.querySelector("#joinedsquad").classList.add("hidden");
+        //     document.querySelector("#racistdialog .dialogcontent .closebutton").removeEventListener("click", closeDialog);
+        // }
+        buildList();
     }
 }
