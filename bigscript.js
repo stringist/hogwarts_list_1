@@ -592,7 +592,7 @@ function displayExpelledStudent(student) {
     console.log(`displayExpelled student is displaying ${student.firstName}, ${expelledStudents}`)
         // create clone
     const clone = document.querySelector("template#expelledStudentTable").content.cloneNode(true);
-    // clone.classList.add("expelled_list");
+
     // set clone data
     //  tr NAME
     if (settings.firstNamelastName === true) {
@@ -620,53 +620,11 @@ function displayExpelledStudent(student) {
         clone.querySelector(".blood_container").classList.add("muggle_blood");
     }
 
-    // tr PREFECT
-    if (student.prefect === true) {
-        clone.querySelector(".prefect_container").classList.add("prefect_selected");
-    } else {
-        clone.querySelector(".prefect_container").classList.remove("prefect_selected");
-    }
-
-    // tr SQUAD
-    if (student.squad === true) {
-        console.log(`studenst squad check class list`);
-        clone.querySelector(".squad_container").classList.remove("squad_unselected");
-        clone.querySelector(".squad_container").classList.add("squad_selected");
-    } else {
-        clone.querySelector(".squad_container").classList.remove("squad_selected");
-        clone.querySelector(".squad_container").classList.add("squad_unselected");
-    }
-
-    // PREFECT & TOGGLE Prefect
-    clone.querySelector(".prefect_container").addEventListener("click", togglePrefect);
-
-    function togglePrefect() {
-        if (student.prefect) {
-            student.prefect = false;
-            buildList();
-        } else {
-            tryToMakePrefect(student);
-        }
-        buildList();
-    }
-
-    // SQUAD & TOGGLE
-    clone.querySelector(".squad_container").addEventListener("click", toggleSquad);
-
-    function toggleSquad() {
-        if (student.squad) {
-            student.squad = false;
-            buildList();
-        } else {
-            tryToAddToSquad(student);
-        }
-        buildList();
-    }
 
     clone.querySelector(`[data-field=name]`).addEventListener("click", detailsPopUp);
 
     function detailsPopUp() {
-        document.querySelector(".modal").classList.remove("hidden");
+        document.querySelector("div.modal").classList.remove("hidden");
 
         // add event listeners
         document.querySelector("#makePrefect").addEventListener("click", togglePrefect);

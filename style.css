@@ -308,4 +308,11 @@ div.modal {
 
 .expelled_list {
     color: red;
+    text-decoration: line-through;
+    filter: blur(100);
+}
+
+.expelled_list>td>.prefect_container,
+.expelled_list>td>.squad_container {
+    display: none;
 }
