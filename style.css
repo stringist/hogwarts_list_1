@@ -306,4 +306,6 @@ div.modal {
     justify-content: space-evenly;
 }
 
-.expelled_list {}
+.expelled_list {
+    color: red;
+}
