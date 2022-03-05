@@ -19,6 +19,17 @@
     src: url("./fonts/HanryPotterDemoRegular.ttf");
 }
 
+
+/* @import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap');
+@font-face {
+    font-family: "adobe-handwriting-frank";
+    src: url("https://use.typekit.net/af/db9a43/00000000000000007735b5fe/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"), url("https://use.typekit.net/af/db9a43/00000000000000007735b5fe/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"), url("https://use.typekit.net/af/db9a43/00000000000000007735b5fe/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+    font-display: auto;
+    font-style: normal;
+    font-weight: 400;
+    font-stretch: normal;
+} */
+
 :root {
     --darkred: rgb(26, 0, 0);
     --medred: rgb(152, 0, 0);
@@ -26,6 +37,7 @@
     --accent: "lumos";
     --cursive: "ovation";
     --altcursive: "albus";
+    --handwrite: "adobe-handwriting-frank", sans-serif;
 }
 
 body,
@@ -130,8 +142,8 @@ button {
 td {
     font-family: var(--cursive);
     font-size: 2.5rem;
-    border-bottom: solid .5px black;
-    border-radius: 0 0 5px 5px;
+    /* border-bottom: solid .5px black; */
+    /* border-radius: 0 0 5px 5px; */
     text-align: center;
 }
 
@@ -293,3 +305,5 @@ div.modal {
     display: flex;
     justify-content: space-evenly;
 }
+
+.expelled_list {}

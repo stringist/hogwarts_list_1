@@ -300,6 +300,7 @@ function buildList() {
 function displayList(students) {
     document.querySelector("#list tbody").innerHTML = "";
     students.forEach(displayStudent);
+    // expelledStudents.
 }
 
 function displayStudent(student) {
@@ -559,12 +560,15 @@ function displayStudent(student) {
 
     function tryToExpel() {
         if (!student.hacker) {
+            console.log(`${student.firstName} is being expelled.`)
             student.expelled = true;
             const studentIndex = allStudents.indexOf(student);
             console.log(studentIndex);
-            expelledStudents = allStudents.splice(studentIndex, 1);
+            const newExpelledStudent = allStudents.splice(studentIndex, 1);
+            expelledStudents.push(newExpelledStudent);
             console.log(expelledStudents);
-            closeExpelDialog()
+            buildList()
+            closeExpelDialog();
         }
 
         function closeExpelDialog() {
