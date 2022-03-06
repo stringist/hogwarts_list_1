@@ -10,7 +10,7 @@
     <!-- <script src="./bigscript.js" defer></script> -->
 </head>
 
-<body>
+<body class="hacked">
     <div class="top-wrapper">
         <h1>List of Students</h1>
 
@@ -161,11 +161,42 @@
 
     <div id="cantexpel" class="dialog hidden">
         <div class="dialogcontent">
-            <h1>You do not have the power to expel <span class="infiltrator">Name</span>!
+            <h1>You do not have the power to expel this student!
             </h1>
             <button class="closebutton">I see.</button>
         </div>
     </div>
+    <footer>
+        <div class="footer-wrapper">
+            <div class="counters  parchment_background">
+                <div>Current students: <span id="allStudentsCount"></span></div>
+                <div>Expelled: <span id="expelledCount"></span></div>
+                <div>Gryffindor: <span id="gryffindorCount"></span></div>
+                <div>Hufflepuff: <span id="hufflepuffCount"></span></div>
+                <div>Ravenclaw: <span id="ravenclawCount"></span></div>
+                <div>Slytherin: <span id="slytherinCount"></span></div>
+
+                <div><span id=""></span></div>
+                <div><span id=""></span></div>
+                <div><span id=""></span></div>
+            </div>
+            <div class="infoCard parchment_background">
+                <h3></h3>
+                <ul>
+                    <li>
+                        <div class="blood_container full_blood"></div>Pure Blood</li>
+                    <li>
+                        <div class="blood_container half_blood"></div>Half-Blood</li>
+                    <li>
+                        <div class="blood_container muggle_blood"></div>Muggle Blood</li>
+                    <li>
+                        <div class="prefect_container prefect_selected"></div>Prefect</li>
+                    <li>
+                        <div class="squad_container squad_selected"></div>Member of Inquisitorial Squad</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
 <script src="./bigscript.js"></script>
 
