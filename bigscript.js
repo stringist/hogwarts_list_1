@@ -41,6 +41,17 @@ function start() {
 }
 
 function addEventListeners() {
+    // window.addEventListener("keyup", (e) => {
+    //     if (e.code === 32) { hackTheSystem() }
+    // });
+    // document.body.onkeyup = function(e) {
+    //     if (e.code == 32) {
+    //         hackTheSystem();
+    //     }
+    // }
+
+    document.querySelector("h1").addEventListener("click", hackTheSystem)
+
     const sortingButtons = document.querySelectorAll("[data-action=sort]");
     const filterOptions = document.querySelectorAll("[data-action=filter]");
 
@@ -877,46 +888,39 @@ function displayExpelledStudent(student) {
     }
 }
 
-hackTheSystem();
-
 function hackTheSystem() {
+    console.log("The system is hacked! ")
+    document.querySelector("body").classList.add("hacked");
     settings.hacked = true;
+    buildList();
 }
 
-// function addSelfToList() {
-//     const hacker = {
-//         firstName: "Kalle",
-//         middleName: "",
-//         lastName: "Tiihonen",
-//         nickName: "",
-//         house: "Ravenclaw",
-//         blood: "muggle",
-//         gender: "boy",
-//         prefect: false,
-//         squad: false,
-//         expelled: false,
-//         hacker: true
-//     }
-//     allStudents.push(hacker);
-//     console.log(allStudents);
-//     buildList();
-// }
-// function randomizeBlood() {
-//   console.log(allStudents);
-//   const random = Math.floor(Math.random() * 3);
-//   const bloodArr = ["half", "full", "muggle"];
-//   allStudents.forEach((student) => {
-//     student.blood = bloodArr[random];
-//   });
-// }
+
 function updateCounters() {
     document.querySelector("#allStudentsCount").textContent = allStudents.length;
     document.querySelector("#expelledCount").textContent = expelledStudents.length;
-    // document.querySelector("#gryffindorCount").textContent = ;
+    // document.querySelector("#gryffindorCount").textContent = allStudents.filter();
 
-    // document.querySelector("#hufflepuffCount").textContent = ;
+    //     document.querySelector("#hufflepuffCount").textContent = allStudents.filter(countFilter(gryffindor));
 
-    // document.querySelector("#ravenclawCount").textContent = ;
+    //     document.querySelector("#ravenclawCount").textContent = ;
 
-    // document.querySelector("#slytherinCount").textContent = ;
+    //     document.querySelector("#slytherinCount").textContent = ;
+    // }
+
+    // function countFilter(house) {
+
+    //        const filteredList = allStudents.filter(houseFilter);
+
+
+    //     function houseFilter(student) {
+    //         //console.log(student);
+    //         if (student.house.toLowerCase() === settings.filterBy) {
+    //             return true;
+    //         } else {
+    //             return false;
+    //         }
+    //     }
+    //     return filteredList;
+    // 
 }
