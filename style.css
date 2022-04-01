@@ -119,6 +119,19 @@ select {
     padding: .5rem;
 }
 
+.top-wrapper {
+    /* display: flex;
+    align-items: center; */
+}
+
+.search-wrapper {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    text-align: right;
+    margin-left: auto;
+}
+
 option {
     background-color: unset;
 }
@@ -387,4 +400,18 @@ footer ul div span {
     margin-right: 0;
     border-left: solid 1px black;
     border-top: solid 1px black;
+}
+
+label[for="search"] {
+    font-size: 2rem;
+    font-family: var(--altcursive);
+}
+
+input[type="search"] {
+    background-color: unset;
+    border: solid .51px var(--darkred);
+    border-width: 3px 3px 3px 4px;
+    border-radius: 95% 4% 97% 5%/4% 94% 3% 95%;
+    transform: rotate(2deg);
+    padding: .5rem;
 }
