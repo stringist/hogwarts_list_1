@@ -27,4 +27,4 @@ add blood list, figure out blood algorithm DONE
 
 fix footer in hacked state (??)
 connect all counters
-fix modal styling
+fix modal styling`
