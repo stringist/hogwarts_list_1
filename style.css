@@ -159,11 +159,21 @@ button {
 }
 
 td {
-    font-family: var(--cursive);
-    font-size: 3.5rem;
-    /* border-bottom: solid .5px black; */
+    font-family: var(--altcursive);
+    font-size: 2.5rem;
+    border-top: solid .5px rgba(33, 33, 33, 0.293);
+    padding-bottom: .8rem;
+    padding-top: .8rem;
     /* border-radius: 0 0 5px 5px; */
     text-align: center;
+}
+
+td>* {
+    margin: auto;
+}
+
+tbody>template:nth-child(even) {
+    background-color: rgba(27, 227, 5, 0.13);
 }
 
 #sorting th.sortby[data-sort-direction="asc"]::after {
@@ -202,7 +212,7 @@ td {
     background-repeat: no-repeat;
     width: 35px;
     height: 35px;
-    margin: auto;
+    /* margin: auto; */
 }
 
 .big_blood_container {
@@ -234,7 +244,7 @@ td {
     width: 35px;
     height: 35px;
     cursor: pointer;
-    margin: auto;
+    /* margin: auto; */
 }
 
 .big_prefect_container {
@@ -260,7 +270,7 @@ td {
     width: 35px;
     height: 35px;
     cursor: pointer;
-    margin: auto;
+    /* margin: auto; */
 }
 
 .big_squad_container {
@@ -348,7 +358,8 @@ tbody #currentStudents {
 }
 
 footer {
-    position: sticky;
+    width: 100%;
+    position: fixed;
     bottom: 0;
     margin: 0;
 }
@@ -372,21 +383,22 @@ footer {
 }
 
 footer ul {
-    font-family: var(--cursive);
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
-
-footer ul>* {
+    font-family: var(--altcursive);
+    font-size: 1.5rem;
     display: flex;
-    justify-content: space-between;
-    /* flex-wrap: wrap; */
-    margin-bottom: .5rem;
+    /* justify-content: space-between; */
+    height: 10rem;
+    column-gap: 1rem;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /* columns: 2; */
+    /* margin-bottom: .5rem; */
+    /* padding-right: .5rem; */
+    /* padding-left: .5rem; */
 }
 
-footer ul div {
-    margin: auto 0 auto 0;
+footer ul li {
+    margin-bottom: .8rem;
 }
 
 footer ul div span {
@@ -395,7 +407,7 @@ footer ul div span {
 
 .infoCard {
     height: 12rem;
-    width: 25rem;
+    width: 28rem;
     /* position: relative; */
     margin-right: 0;
     border-left: solid 1px black;

@@ -51,6 +51,7 @@ function addEventListeners() {
     // }
 
     document.querySelector("h1").addEventListener("click", hackTheSystem)
+    document.querySelector("#search").addEventListener("input", searchFieldInput);
 
     const sortingButtons = document.querySelectorAll("[data-action=sort]");
     const filterOptions = document.querySelectorAll("[data-action=filter]");
@@ -336,7 +337,9 @@ function buildList() {
     }
 
     displayList(sortedList);
-    displayExpelledList(expelledStudents);
+    if (expelledStudents.length >= 1) {
+        displayExpelledList(expelledStudents);
+    }
     updateCounters();
 }
 
@@ -888,6 +891,23 @@ function displayExpelledStudent(student) {
     }
 }
 
+function searchFieldInput(input) {
+    console.log(input.target.value);
+
+    let searchFunc = allStudents.filter(searchStudents);
+    prepareObjects(searchFunc);
+
+    function searchStudents(student) {
+        console.log(student);
+        return (
+            student.firstName
+            .toUpperCase()
+            .includes(input.target.value.toUpperCase()) ||
+            student.lastName.toUpperCase().includes(input.target.value.toUpperCase())
+        );
+    }
+}
+
 function hackTheSystem() {
     console.log("The system is hacked! ")
     document.querySelector("body").classList.add("hacked");
@@ -922,5 +942,5 @@ function updateCounters() {
     //         }
     //     }
     //     return filteredList;
-    // 
+
 }
