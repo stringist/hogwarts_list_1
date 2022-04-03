@@ -10,8 +10,8 @@ clean house & gender data
 
 view
 make one name column thead
-add <--> and ^ and dir arrows
-display as lastname, firstname, or firstname, lastname
+add <--> and ^ and dir arrows DONE
+display as lastname, firstname, or firstname, lastname 
 
 controller 
 connect directional arrows
@@ -22,6 +22,7 @@ separate toggle swtches and menus from sort triggers
 
 add tool tips?
 
-add conditions to prefects 
-add blood list, figure out blood algorithm
+add conditions to prefects DONE
+add blood list, figure out blood algorithm DONE
 
+fix footer in hacked state (??)
