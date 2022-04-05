@@ -182,11 +182,6 @@ thead {
     left: 0;
 }
 
-tbody {
-    /* display: none; */
-    overflow: scroll;
-}
-
 tbody>template:nth-child(even) {
     background-color: rgba(27, 227, 5, 0.13);
 }
@@ -220,6 +215,11 @@ tbody>template:nth-child(even) {
 
 .parchment_background {
     background-image: url("./assets/parchment2.png");
+    border: solid hotpink 1px;
+    z-index: 100;
+    /* background-position: center;
+    background-size: cover;
+    background-attachment: fixed; */
 }
 
 .shadeOut {
@@ -374,7 +374,7 @@ tbody #currentStudents {
 
 .hacked {
     filter: invert();
-    background-image: url(./assets/parchment_inverted.png);
+    /* background-image: url(./assets/parchment_inverted.png); */
 }
 
 footer {

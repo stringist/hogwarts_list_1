@@ -1,6 +1,18 @@
 "use strict";
 
 window.addEventListener("DOMContentLoaded", start);
+window.onscroll = function() {
+    scrollFunction();
+};
+
+function scrollFunction() {
+    const head = document.querySelector("thead");
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        head.classList.add("parchment_background");
+    } else {
+        head.classList.remove("parchment_background");
+    }
+}
 
 let allStudents = [];
 let expelledStudents = [];
