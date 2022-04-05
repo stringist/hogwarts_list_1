@@ -20,49 +20,49 @@
 
     </div>
 
+    <main>
+        <table id="list">
+            <thead>
+                <tr id="sorting">
+                    <th data-action="sort" data-sort-direction="asc" data-sort="name">
+                        Name
 
-    <table id="list">
-        <thead>
-            <tr id="sorting">
-                <th data-action="sort" data-sort-direction="asc" data-sort="name">
-                    Name
+                    </th>
 
-                </th>
+                    <th data-action="sort" data-sort-direction="asc" data-sort="house">
+                        House
 
-                <th data-action="sort" data-sort-direction="asc" data-sort="house">
-                    House
-
-                </th>
-                <th data-action="sort" data-sort-direction="asc" data-sort="blood">
-                    Blood status
-                </th>
-                <th data-action="sort" data-sort-direction="asc" data-sort="prefect">
-                    Prefect
-                </th>
-                <th data-action="sort" data-sort-direction="asc" data-sort="squad">
-                    Inquisitor
-                </th>
-            </tr>
-            <tr id="filtering">
-                <th id="nametoggle">First ⇋ Last </th>
-                <th class="menu"> <select name="houses" id="housesDrop">
+                    </th>
+                    <th data-action="sort" data-sort-direction="asc" data-sort="blood">
+                        Blood status
+                    </th>
+                    <th data-action="sort" data-sort-direction="asc" data-sort="prefect">
+                        Prefect
+                    </th>
+                    <th data-action="sort" data-sort-direction="asc" data-sort="squad">
+                        Inquisitor
+                    </th>
+                </tr>
+                <tr id="filtering">
+                    <th id="nametoggle">First ⇋ Last </th>
+                    <th class="menu"> <select name="houses" id="housesDrop">
               <option data-action="filter" data-filter="all"value="all" selected>All houses</option>
               <option data-action="filter" data-filter="gryffindor" value="gryffindor">Gryffindor</option>
               <option data-action="filter" data-filter="hufflepuff" value="hufflepuff">Hufflepuff</option>
               <option data-action="filter" data-filter="ravenclaw" value="ravenclaw">Ravenclaw</option>
               <option data-action="filter" data-filter="slytherin" value="slytherin">Slytherin</option>
             </select></th>
-            </tr>
-        </thead>
+                </tr>
+            </thead>
 
-        <tbody id="currentStudents">
-            <!-- student template will be copied and inserted here -->
-        </tbody>
-        <tbody id="expelledStudents">
-            <!-- student template will be copied and inserted here -->
-        </tbody>
-    </table>
-    <template id="currentStudentTable">
+            <tbody id="currentStudents">
+                <!-- student template will be copied and inserted here -->
+            </tbody>
+            <tbody id="expelledStudents">
+                <!-- student template will be copied and inserted here -->
+            </tbody>
+        </table>
+        <template id="currentStudentTable">
       <tr>
         <td data-field="name">full name</td>
         <td data-field="house">House</td>
@@ -72,8 +72,8 @@
      </tr>
     </template>
 
-    <!-- expelled student template-->
-    <template id="expelledStudentTable">
+        <!-- expelled student template-->
+        <template id="expelledStudentTable">
       <tr class="expelled_list">
         <td data-field="name">full name</td>
         <td data-field="house">House</td>
@@ -83,86 +83,87 @@
      </tr>
     </template>
 
-    <!-- modal popup -->
-    <div class="modal hidden">
-        <div class="modalcontent">
-            <div class="hidden redstamp">Expelled</div>
-            <img src="" alt="" />
-            <ul>
-                <li id="detailFirstName">First Name:<span></span></li>
-                <li id="detailMiddleName">Middle Name:<span></span></li>
-                <li id="detailSurname">Surname:<span></span></li>
-                <li id="detailNickname">Nickname:<span></span></li>
-                <li id="detailGender">Gender:<span></span> </li>
-                <li id="detailHouse">House:<span></span></li>
-                <li id="detailBlood">Blood status:
-                    <span></span>
-                    <div class="big_blood_container"></div>
-                </li>
-                <li id="detailPrefect">Prefect:<span></span>
-                    <div class="big_prefect_container"></div>
-                </li>
-                <li id="detailSquad">Inquisitorial Squad<span></span>
-                    <div class="big_squad_container"></div>
-                </li>
-            </ul>
-            <button id="makePrefect" class="odd">Appoint as Prefect</button>
-            <button id="inquisitorial">Add to Inquisitorial Squad</button>
-            <button id="expel" class="odd">Expel student</button>
-            <button id="back" class="closebutton">Back to list</button>
-        </div>
-    </div>
-
-    <!-- Dialogs for handling too many prefects etc. -->
-
-    <div id="sexistdialog" class="dialog hidden">
-        <div class="dialogcontent">
-            <h1>There may only be one boy and one girl prefect in each house.</h1>
-            <h2>Remove one, if you wish to appoint another</h2>
-            <div class="buttons-wrapper">
-                <button id="removeother" class="odd" data-action="remove1">
-                <span class="prefect1">Name</span>?
-          </button>
-                <p class="or">Or</p>
-                <button class="closebutton">Go back</button>
+        <!-- modal popup -->
+        <div class="modal hidden">
+            <div class="modalcontent">
+                <div class="hidden redstamp">Expelled</div>
+                <img src="" alt="" />
+                <ul>
+                    <li id="detailFirstName">First Name:<span></span></li>
+                    <li id="detailMiddleName">Middle Name:<span></span></li>
+                    <li id="detailSurname">Surname:<span></span></li>
+                    <li id="detailNickname">Nickname:<span></span></li>
+                    <li id="detailGender">Gender:<span></span> </li>
+                    <li id="detailHouse">House:<span></span></li>
+                    <li id="detailBlood">Blood status:
+                        <span></span>
+                        <div class="big_blood_container"></div>
+                    </li>
+                    <li id="detailPrefect">Prefect:<span></span>
+                        <div class="big_prefect_container"></div>
+                    </li>
+                    <li id="detailSquad">Inquisitorial Squad<span></span>
+                        <div class="big_squad_container"></div>
+                    </li>
+                </ul>
+                <button id="makePrefect" class="odd">Appoint as Prefect</button>
+                <button id="inquisitorial">Add to Inquisitorial Squad</button>
+                <button id="expel" class="odd">Expel student</button>
+                <button id="back" class="closebutton">Back to list</button>
             </div>
         </div>
-    </div>
 
-    <div id="racistdialog" class="dialog hidden">
-        <div class="dialogcontent">
-            <h1>
-                Only Slytherins and those who are pure of blood may be appointed to the Inquisitorial Squad!
-            </h1>
-            <button class="closebutton">Alrighty then.</button>
-        </div>
-    </div>
+        <!-- Dialogs for handling too many prefects etc. -->
 
-    <div id="joinedsquad" class="dialog hidden">
-        <div class="dialogcontent">
-            <h1>
-                <span class="squadMember">Name</span> has joined the Inquisitorial Squad!
-            </h1>
-            <button class="closebutton">Excellent</button>
+        <div id="sexistdialog" class="dialog hidden">
+            <div class="dialogcontent">
+                <h1>There may only be one boy and one girl prefect in each house.</h1>
+                <h2>Remove one, if you wish to appoint another</h2>
+                <div class="buttons-wrapper">
+                    <button id="removeother" class="odd" data-action="remove1">
+                <span class="prefect1">Name</span>?
+          </button>
+                    <p class="or">Or</p>
+                    <button class="closebutton">Go back</button>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div id="leftsquad" class="dialog hidden">
-        <div class="dialogcontent">
-            <h1>
-                <span class="squadMember">Name</span> has left the Inquisitorial Squad!
-            </h1>
-            <button class="closebutton">Very well...</button>
+        <div id="racistdialog" class="dialog hidden">
+            <div class="dialogcontent">
+                <h1>
+                    Only Slytherins and those who are pure of blood may be appointed to the Inquisitorial Squad!
+                </h1>
+                <button class="closebutton">Alrighty then.</button>
+            </div>
         </div>
-    </div>
 
-    <div id="cantexpel" class="dialog hidden">
-        <div class="dialogcontent">
-            <h1>You do not have the power to expel this student!
-            </h1>
-            <button class="closebutton">I see.</button>
+        <div id="joinedsquad" class="dialog hidden">
+            <div class="dialogcontent">
+                <h1>
+                    <span class="squadMember">Name</span> has joined the Inquisitorial Squad!
+                </h1>
+                <button class="closebutton">Excellent</button>
+            </div>
         </div>
-    </div>
+
+        <div id="leftsquad" class="dialog hidden">
+            <div class="dialogcontent">
+                <h1>
+                    <span class="squadMember">Name</span> has left the Inquisitorial Squad!
+                </h1>
+                <button class="closebutton">Very well...</button>
+            </div>
+        </div>
+
+        <div id="cantexpel" class="dialog hidden">
+            <div class="dialogcontent">
+                <h1>You do not have the power to expel this student!
+                </h1>
+                <button class="closebutton">I see.</button>
+            </div>
+        </div>
+    </main>
     <footer>
         <div class="footer-wrapper">
             <div class="counters  parchment_background">

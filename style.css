@@ -62,6 +62,10 @@ body {
     color: var(--darkred);
 }
 
+main {
+    margin-bottom: 20vw;
+}
+
 h1 {
     font-family: var(--headline);
     text-align: center;
@@ -172,8 +176,24 @@ td>* {
     margin: auto;
 }
 
+thead {
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+
+tbody {
+    /* display: none; */
+    overflow: scroll;
+}
+
 tbody>template:nth-child(even) {
     background-color: rgba(27, 227, 5, 0.13);
+}
+
+#sorting th::after {
+    content: "⬍";
+    font-size: 3rem;
 }
 
 #sorting th.sortby[data-sort-direction="asc"]::after {
@@ -325,7 +345,7 @@ tbody>template:nth-child(even) {
 
 .dialog,
 div.modal {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100vw;
@@ -384,7 +404,7 @@ footer {
 
 footer ul {
     font-family: var(--altcursive);
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     display: flex;
     /* justify-content: space-between; */
     height: 10rem;
@@ -399,6 +419,7 @@ footer ul {
 
 footer ul li {
     margin-bottom: .8rem;
+    max-width: 10ch;
 }
 
 footer ul div span {

@@ -25,6 +25,13 @@ add tool tips?
 add conditions to prefects DONE
 add blood list, figure out blood algorithm DONE
 
+
+
+
+
 fix footer in hacked state (??)
 connect all counters
-fix modal styling`
+fix modal styling
+
+make responsive - mostly display none
+add background on scroll to thead
