@@ -110,6 +110,7 @@ function getBloodStatus(student) {
         const bloodArr = ["half", "full", "muggle"];
 
         return bloodArr[random];
+
     } else {
         if (isNameListed(halfBloodArr, lastName)) {
             return "half";
@@ -347,7 +348,6 @@ function buildList() {
             buildList();
         }
     }
-
     displayList(sortedList);
     if (expelledStudents.length >= 1) {
         displayExpelledList(expelledStudents);
@@ -922,37 +922,37 @@ function searchFieldInput(input) {
 
 function hackTheSystem() {
     console.log("The system is hacked! ")
+    document.querySelector("html").classList.add("hacked");
     document.querySelector("body").classList.add("hacked");
+    document.querySelector("table *").classList.add("hacked");
+    document.querySelector(".counters").classList.add("hacked");
+    document.querySelector(".infoCard").classList.add("hacked");
+    document.querySelector(".blood_container").classList.add("invert");
+    document.querySelector(".prefect_container").classList.add("invert");
+    document.querySelector(".squad_container").classList.add("invert");
+    document.querySelector(`[data-field="blood"]`).classList.add("invert");
+
     settings.hacked = true;
     buildList();
 }
 
 
 function updateCounters() {
-    document.querySelector("#allStudentsCount").textContent = allStudents.length;
+    const studentsDisplayed = allStudents.length;
+    document.querySelector("#allStudentsCount").textContent = studentsDisplayed;
     document.querySelector("#expelledCount").textContent = expelledStudents.length;
-    // document.querySelector("#gryffindorCount").textContent = allStudents.filter();
 
-    //     document.querySelector("#hufflepuffCount").textContent = allStudents.filter(countFilter(gryffindor));
+    let gryffendorCount = allStudents.filter((e) => e.house === "Gryffindor");
+    let hufflepuffCount = allStudents.filter((e) => e.house === "Hufflepuff");
+    let slytherinCount = allStudents.filter((e) => e.house === "Slytherin");
+    let ravenclawCount = allStudents.filter((e) => e.house === "Ravenclaw");
 
-    //     document.querySelector("#ravenclawCount").textContent = ;
-
-    //     document.querySelector("#slytherinCount").textContent = ;
-    // }
-
-    // function countFilter(house) {
-
-    //        const filteredList = allStudents.filter(houseFilter);
-
-
-    //     function houseFilter(student) {
-    //         //console.log(student);
-    //         if (student.house.toLowerCase() === settings.filterBy) {
-    //             return true;
-    //         } else {
-    //             return false;
-    //         }
-    //     }
-    //     return filteredList;
-
+    document.querySelector("#hufflepuffCount").textContent =
+        hufflepuffCount.length;
+    document.querySelector("#slytherinCount").textContent =
+        slytherinCount.length;
+    document.querySelector("#gryffindorCount").textContent =
+        gryffendorCount.length;
+    document.querySelector("#ravenclawCount").textContent =
+        ravenclawCount.length;
 }

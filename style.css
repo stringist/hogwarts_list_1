@@ -373,8 +373,12 @@ tbody #currentStudents {
 }
 
 .hacked {
-    filter: invert();
-    /* background-image: url(./assets/parchment_inverted.png); */
+    background-image: url(./assets/parchment_inverted.png);
+    color: white;
+}
+
+.invert {
+    filter: invert(360);
 }
 
 footer {
@@ -400,6 +404,10 @@ footer {
     height: 5rem;
     margin-top: auto;
     border-top: solid 1px black;
+}
+
+.counters div span {
+    font-size: 2rem;
 }
 
 footer ul {
