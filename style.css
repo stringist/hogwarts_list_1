@@ -85,6 +85,7 @@ th {
 }
 
 table {
+    border-collapse: collapse;
     width: 100%;
 }
 
@@ -121,11 +122,6 @@ select {
     border-radius: 95% 4% 97% 5%/4% 94% 3% 95%;
     transform: rotate(2deg);
     padding: .5rem;
-}
-
-.top-wrapper {
-    /* display: flex;
-    align-items: center; */
 }
 
 .search-wrapper {
@@ -182,6 +178,18 @@ thead {
     left: 0;
 }
 
+tbody {
+    border-top: solid 1px var(--darkred);
+    border-width: 2px;
+    border-radius: 4% 95% 6% 95%/95% 4% 5%;
+    transform: rotate(-.5deg);
+}
+
+th {
+    /* border: solid 1px hotpink; */
+    border-collapse: collapse;
+}
+
 tbody>template:nth-child(even) {
     background-color: rgba(27, 227, 5, 0.13);
 }
@@ -218,8 +226,8 @@ tbody>template:nth-child(even) {
     /* border: solid hotpink 1px; */
     z-index: 100;
     /* background-position: center;
-    background-size: cover;
-    background-attachment: fixed; */
+    /* background-size: cover; */
+    background-attachment: fixed;
 }
 
 .shadeOut {
@@ -322,13 +330,7 @@ tbody>template:nth-child(even) {
 }
 
 #sorting {
-    /* display: flex; */
     min-width: 100%;
-    /* justify-content: space-around; */
-    border-bottom: solid 1px var(--darkred);
-    border-width: 2px;
-    border-radius: 4% 95% 6% 95%/95% 4% 5%;
-    transform: rotate(-.5deg);
 }
 
 .modal,
