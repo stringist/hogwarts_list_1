@@ -347,13 +347,14 @@ tbody>template:nth-child(even) {
 
 .dialog,
 div.modal {
-    position: relative;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vw;
     background-image: url("./assets/parchment2.png");
     background-size: contain;
+    z-index: 100;
 }
 
 .buttons-wrapper {

@@ -62,7 +62,7 @@ function addEventListeners() {
     //     }
     // }
 
-    document.querySelector("h1").addEventListener("click", hackTheSystem)
+    document.querySelector("h1").addEventListener("click", hackTheSystem);
     document.querySelector("#search").addEventListener("input", searchFieldInput);
 
     const sortingButtons = document.querySelectorAll("[data-action=sort]");
@@ -921,6 +921,8 @@ function searchFieldInput(input) {
 }
 
 function hackTheSystem() {
+    document.querySelector("h1").removeEventListener("click", hackTheSystem);
+    document.querySelector("h1").addEventListener("click", unHackTheSystem);
     console.log("The system is hacked! ")
     document.querySelector("html").classList.add("hacked");
     document.querySelector("body").classList.add("hacked");
@@ -933,6 +935,23 @@ function hackTheSystem() {
     document.querySelector(`[data-field="blood"]`).classList.add("invert");
 
     settings.hacked = true;
+    buildList();
+}
+
+function unHackTheSystem() {
+    document.querySelector("h1").removeEventListener("click", unHackTheSystem);
+    document.querySelector("h1").addEventListener("click", hackTheSystem);
+    document.querySelector("html").classList.remove("hacked");
+    document.querySelector("body").classList.remove("hacked");
+    document.querySelector("table *").classList.remove("hacked");
+    document.querySelector(".counters").classList.remove("hacked");
+    document.querySelector(".infoCard").classList.remove("hacked");
+    document.querySelector(".blood_container").classList.remove("invert");
+    document.querySelector(".prefect_container").classList.remove("invert");
+    document.querySelector(".squad_container").classList.remove("invert");
+    document.querySelector(`[data-field="blood"]`).classList.remove("invert");
+
+    settings.hacked = false;
     buildList();
 }
 
