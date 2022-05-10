@@ -146,6 +146,19 @@ button {
     border-radius: 95% 4% 97% 5%/4% 94% 3% 95%;
     transform: rotate(2deg);
     cursor: pointer;
+    display: block;
+    margin: auto;
+}
+
+button:hover,
+#currentStudents tr:hover,
+#expelledStudents tr:hover {
+    background-color: rgba(76, 216, 0, 0.099);
+}
+
+#currentStudents tr,
+#expelledStudents tr {
+    cursor: pointer;
 }
 
 [data-action],
@@ -172,11 +185,12 @@ td>* {
     margin: auto;
 }
 
-thead {
+
+/* thead {
     position: sticky;
     top: 0;
     left: 0;
-}
+} */
 
 tbody {
     border-top: solid 1px var(--darkred);
@@ -188,6 +202,10 @@ tbody {
 th {
     /* border: solid 1px hotpink; */
     border-collapse: collapse;
+}
+
+.subheader {
+    font-size: 1rem;
 }
 
 tbody>template:nth-child(even) {
@@ -265,7 +283,7 @@ tbody>template:nth-child(even) {
 }
 
 .prefect_container {
-    background-image: url("./assets/SVG/prefect_unselected.svg");
+    /* background-image: url("./assets/SVG/prefect_unselected.svg"); */
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -341,7 +359,7 @@ tbody>template:nth-child(even) {
 }
 
 .dialog h1 {
-    font-family: var(--cursive);
+    font-family: var(--altcursive);
     font-size: 3rem;
 }
 
@@ -351,15 +369,23 @@ div.modal {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vw;
+    height: 100vh;
     background-image: url("./assets/parchment2.png");
     background-size: contain;
     z-index: 100;
 }
 
+.modalcontent,
+.dialogcontent {
+    width: 80%;
+    height: 100%;
+    margin: 10vw auto;
+}
+
 .buttons-wrapper {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    gap: 2rem;
 }
 
 tbody #currentStudents {
@@ -380,10 +406,6 @@ tbody #currentStudents {
     color: white;
 }
 
-.invert {
-    filter: invert(360);
-}
-
 footer {
     width: 100%;
     position: fixed;
@@ -396,6 +418,7 @@ footer {
     margin: 0;
     display: flex;
     justify-content: space-between;
+    z-index: -10;
 }
 
 .counters {

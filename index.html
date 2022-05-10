@@ -52,6 +52,9 @@
               <option data-action="filter" data-filter="ravenclaw" value="ravenclaw">Ravenclaw</option>
               <option data-action="filter" data-filter="slytherin" value="slytherin">Slytherin</option>
             </select></th>
+                    <th></th>
+                    <th class="subheader">Click to appoint as prefect</th>
+                    <th class="subheader">Click to appoint as Inquisitor</th>
                 </tr>
             </thead>
             <tbody id="currentStudents">
@@ -63,11 +66,11 @@
         </table>
         <template id="currentStudentTable">
       <tr>
-        <td data-field="name">full name</td>
-        <td data-field="house">House</td>
-        <td data-field="blood"><div class="blood_container"></div></td>
-        <td data-field="prefect"><div class="prefect_container"></div></td>
-        <td data-field="squad"><div class="squad_container"></div></td>
+        <td data-field="name" title="Click to read more">full name</td>
+        <td data-field="house" title="Click to read more">House</td>
+        <td data-field="blood" title="Click to read more"><div class="blood_container"></div></td>
+        <td data-field="prefect" title="Click to appoint prefect"><div class="prefect_container"></div></td>
+        <td data-field="squad" title="Click to appoint inquisitor"><div class="squad_container"></div></td>
      </tr>
     </template>
 
@@ -105,10 +108,12 @@
                         <div class="big_squad_container"></div>
                     </li>
                 </ul>
-                <button id="makePrefect" class="odd">Appoint as Prefect</button>
-                <button id="inquisitorial">Add to Inquisitorial Squad</button>
-                <button id="expel" class="odd">Expel student</button>
-                <button id="back" class="closebutton">Back to list</button>
+                <div class="buttons-wrapper">
+                    <button id="makePrefect" class="odd">Appoint as Prefect</button>
+                    <button id="inquisitorial">Add to Inquisitorial Squad</button>
+                    <button id="expel" class="odd">Expel student</button>
+                    <button id="back" class="closebutton">Back to list</button>
+                </div>
             </div>
         </div>
 

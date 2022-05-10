@@ -63,7 +63,7 @@ function addEventListeners() {
     // }
 
     document.querySelector("h1").addEventListener("click", hackTheSystem);
-    document.querySelector("#search").addEventListener("input", searchFieldInput);
+    // document.querySelector("#search").addEventListener("input", searchFieldInput);
 
     const sortingButtons = document.querySelectorAll("[data-action=sort]");
     const filterOptions = document.querySelectorAll("[data-action=filter]");
@@ -435,6 +435,10 @@ function displayStudent(student) {
     }
 
     clone.querySelector(`[data-field=name]`).addEventListener("click", detailsPopUp);
+    clone.querySelector(`[data-field=house]`).addEventListener("click", detailsPopUp);
+    clone.querySelector(`[data-field=blood]`).addEventListener("click", detailsPopUp);
+
+
 
     function detailsPopUp() {
         if (student.hacker) {
@@ -925,18 +929,22 @@ function hackTheSystem() {
     document.querySelector("h1").addEventListener("click", unHackTheSystem);
     console.log("The system is hacked! ")
     document.querySelector("html").classList.add("hacked");
+    document.querySelector("html").classList.add("hacked");
     document.querySelector("body").classList.add("hacked");
     document.querySelector("table *").classList.add("hacked");
     document.querySelector(".counters").classList.add("hacked");
     document.querySelector(".infoCard").classList.add("hacked");
-    document.querySelector(".blood_container").classList.add("invert");
-    document.querySelector(".prefect_container").classList.add("invert");
-    document.querySelector(".squad_container").classList.add("invert");
-    document.querySelector(`[data-field="blood"]`).classList.add("invert");
+    document.querySelector(".dialog").classList.add("hacked");
+    document.querySelector(".modal").classList.add("hacked");
+    // document.querySelector("button").classList.add("hacked");
+
 
     settings.hacked = true;
     buildList();
+    invertIcons();
 }
+
+
 
 function unHackTheSystem() {
     document.querySelector("h1").removeEventListener("click", unHackTheSystem);
@@ -953,6 +961,50 @@ function unHackTheSystem() {
 
     settings.hacked = false;
     buildList();
+}
+
+function invertIcons() {
+    const f_blood = document.querySelectorAll(".full_blood");
+    const h_blood = document.querySelectorAll(".half_blood");
+    const m_blood = document.querySelectorAll(".muggle_blood");
+    const prefect_unselected = document.querySelectorAll(".prefect_unselected");
+    const prefect_selected = document.querySelectorAll(".prefect_selected");
+    const squad_unselected = document.querySelectorAll(".squad_unselected");
+    const squad_selected = document.querySelectorAll(".squad_selected");
+
+    f_blood.forEach((container) => {
+        container.style.backgroundImage = `url("./assets/SVG/full_blood_white.svg")`;
+    });
+
+    h_blood.forEach((container) => {
+        container.style.backgroundImage = `url("./assets/SVG/full_blood_white.svg")`;
+    });
+
+    m_blood.forEach((container) => {
+        container.style.backgroundImage = `url("./assets/SVG/full_blood_white.svg")`;
+    });
+
+    prefect_unselected.forEach((container) => {
+        container.style.backgroundImage = `url("./assets/SVG/prefect_unselected_white.svg")`;
+    });
+
+    prefect_selected.forEach((container) => {
+        container.style.backgroundImage = `url("./assets/SVG/prefect_icon_white.svg")`;
+    });
+
+    squad_unselected.forEach((container) => {
+        container.style.backgroundImage = `url("./assets/SVG/squad_unselected_white.svg")`;
+    });
+
+    squad_selected.forEach((container) => {
+        container.style.backgroundImage = `url("./assets/SVG/squad_icon_white.svg")`;
+    });
+
+
+
+
+
+
 }
 
 
